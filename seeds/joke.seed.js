@@ -1,9 +1,9 @@
 require('../db')
-let userModel = require('../models/User.model')
+let jokeModel = require('../models/Joke.model')
 const mongoose = require('mongoose')
 
-userModel.create([
-  {username: "thisIsAtest", password: "Ar!ar!1123", email: "rita@rita.com"}
+jokeModel.create([
+    {id: 379, type: "test", setup: "hi", punchline:"hey"}
 ])
   .then(() => {
     console.log('Posts seeded')
@@ -13,3 +13,5 @@ userModel.create([
     console.log('ERROR: ', err)
     mongoose.connection.close()
   })
+
+  //  {id: 379, type: "test", setup: "hi", punchline:"hey"}

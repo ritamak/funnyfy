@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
-  })
+})
 
 router.post('/signup', (req, res, next) => {
     const {username, email, password} = req.body
@@ -14,25 +14,25 @@ router.post('/signup', (req, res, next) => {
     }
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if ( !re.test(email)) {
-      res.render('auth/signup.hbs', {error: 'Your email format is a joke right?'})
-      return;
+        res.render('auth/signup.hbs', {error: 'Your email format is a joke right?'})
+        return;
     }
     let passRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
     if (!passRegEx.test(password)) {
-      res.render('auth/signup.hbs', {error: 'Password needs to have a special character a number and be 6-16 characters'})
-      return;
+        res.render('auth/signup.hbs', {error: 'Password needs to have a special character a number and be 6-16 characters'})
+        return;
     }
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
     UserModel.create({username, email, password: hash})
-      .then(() => {
-          res.redirect('/signin')
-      })
-      .catch((err) => {
-          next(err)
-      })
+        .then(() => {
+            res.redirect('/signin')
+    })
+        .catch((err) => {
+            next(err)
+    })
 })
 
 router.get('/profile', (req, res, next) => {
