@@ -27,7 +27,7 @@ app.use(session({
 */
 const index = require("./routes/index");
 app.use("/", index);
-const authRoutes = require("./routes/auth.routes");
+const authRoutes = require("./routes/auth.route");
 app.use("/", authRoutes)
 require("./error-handling")(app);
 
