@@ -1,13 +1,11 @@
 <h1>This is SignIn</h1>
 
 <form action="/signin" method="POST">
-    <label>Name</label>
-    <input name="username" type="text"  placeholder="Enter your username"  >
     <label>Email</label>
     <input name="email" type="email"  placeholder="Enter your email"  >
     <label>Password</label>
     <input name="password" type="password"  placeholder="Enter your Password"  >
-    <button>Sign Up</button>
+    <button src="/profile.hbs">Sign In</button>
 </form>
 
 {{#if error}}
