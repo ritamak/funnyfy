@@ -28,20 +28,13 @@ router.post('/signup', (req, res, next) => {
 
     UserModel.create({username, email, password: hash})
         .then(() => {
-            res.redirect('/signin')
+            res.redirect('/profile')
     })
         .catch((err) => {
             next(err)
     })
 })
 
-router.get('/profile', (req, res, next) => {
-    res.render('auth/profile.hbs')
-})
-router.get("/about", (req, res, next) => {
-    res.render('auth/about.hbs')
-
-})
 
 
 router.get("/signin", (req, res, next) => {
@@ -61,6 +54,19 @@ UserModel.create({email, password: hash})
 .catch((err) => {
     next(err)
 })
+})
+
+
+router.get('/main', (req, res, next) => {
+    res.render('auth/main.hbs')
+})
+
+router.get('/profile', (req, res, next) => {
+    res.render('auth/profile.hbs')
+})
+router.get("/about", (req, res, next) => {
+    res.render('auth/about.hbs')
+
 })
 
 module.exports = router;
