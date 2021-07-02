@@ -123,4 +123,13 @@ router.get('/main/knock-knock', (req, res, next) => {
     console.log(err)
   })})
 
+router.get('/jokes', (req, res, next) => {
+  const searchedField = req.query.jokes.type
+    JokeModel.find({type:{$regex: searchedField, $options: '$i'}})
+    .then((data) => {
+      res.redirect(data)
+    })
+})
+
+
 module.exports = router;
