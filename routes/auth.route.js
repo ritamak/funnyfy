@@ -81,8 +81,45 @@ router.get('/profile', (req, res, next) => {
 router.get("/main", (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
-    res.render('auth/main.hbs', {jokes})
+    let general = jokes.filter(joke => joke.type.includes("general"))
+    let programming = jokes.filter(joke => joke.type.includes("programming"))
+    let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+    res.render('auth/main.hbs', {general, programming, knock, jokes})
+  })
+  .catch((err) => {
+    console.log(err)
   })
   })
+  // GET for the programming jokes
+router.get('/main/programming', (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    let programming = jokes.filter(joke => joke.type.includes("programming"))
+    res.render('auth/programming.hbs', {programming, jokes})
+  })
+  .catch((err) => {
+    console.log(err)
+  })})
+// GET for the general jokes
+router.get('/main/general', (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    let general = jokes.filter(joke => joke.type.includes("general"))
+    res.render('auth/general.hbs', {general, jokes})
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+// GET for the profile
+router.get('/main/knock-knock', (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+    res.render('auth/knock-knock.hbs', {knock, jokes})
+  })
+  .catch((err) => {
+    console.log(err)
+  })})
 
 module.exports = router;
