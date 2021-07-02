@@ -3,7 +3,7 @@ const UserModel = require('../models/User.model')
 const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model')
 // GET for the about
-router.get("/aboutus", (req, res, next) => {
+router.get("/about", (req, res, next) => {
   res.render('auth/about.hbs')
   })
 // GET for the singUp
@@ -73,19 +73,12 @@ const {email, password} = req.body;
 router.get('/main', (req, res, next) => {
     res.render('auth/main.hbs')
 })
-// check if the user is logged in
-function checkLoggedIn(req, res, next) {
-    if ( req.session.loggedInUser) {
-      next()
-    } else {
-      res.redirect('/signin')
-    }
-}
-// GET for the profile
+
+
 router.get('/profile', (req, res, next) => {
   res.render('auth/profile.hbs')
 })
-//get for the main
+
 router.get("/main", (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
