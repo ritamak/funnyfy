@@ -1,11 +1,16 @@
 const router = require("express").Router();
 const UserModel = require('../models/User.model')
 const bcrypt = require('bcryptjs');
-
+const JokeModel = require('../models/Joke.model')
+// GET for the about
+router.get("/aboutus", (req, res, next) => {
+  res.render('auth/about.hbs')
+  })
+// GET for the singUp
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
-})
-
+  })
+// POST for the signUp  
 router.post('/signup', (req, res, next) => {
     const {username, email, password} = req.body
     if (!username || !email || !password) {
@@ -14,59 +19,77 @@ router.post('/signup', (req, res, next) => {
     }
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if ( !re.test(email)) {
-        res.render('auth/signup.hbs', {error: 'Your email format is a joke right?'})
-        return;
+      res.render('auth/signup.hbs', {error: 'Your email format is a joke right?'})
+      return;
     }
     let passRegEx = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
     if (!passRegEx.test(password)) {
-        res.render('auth/signup.hbs', {error: 'Password needs to have a special character a number and be 6-16 characters'})
-        return;
+      res.render('auth/signup.hbs', {error: 'Password needs to have a special character a number and be 6-16 characters'})
+      return;
     }
 
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
 
     UserModel.create({username, email, password: hash})
-        .then(() => {
-            res.redirect('/profile')
-    })
-        .catch((err) => {
-            next(err)
-    })
+      .then(() => {
+          res.redirect('/profile')
+      })
+      .catch((err) => {
+          next(err)
+      })
 })
-
-
-
+// GET for the SignIn
 router.get("/signin", (req, res, next) => {
-    res.render('auth/signin.hbs');
+  res.render('auth/signin.hbs');
 });
-
-
+// POST for the SignIn
 router.post('/signin', (req, res, next) => {
-const {email, password} = req.body  
-const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync(password, salt);
-
-UserModel.create({email, password: hash})
-.then(() => {
-    res.redirect('auth/profile.hbs')
+  const {email, password} = req.body  
+  UserModel.findOne({email})
+    .then((user) => {
+      if (user) {
+        let isValid = bcrypt.compareSync( password, user.password);
+        if (isValid) {
+          req.session.loggedInUser = user
+          req.app.locals.isLoggedIn = true;
+          res.redirect('/profile')
+        } else {
+          res.render('auth/signin', {error: 'Invalid password'})
+        }
+      } else {
+        res.render('auth/signin', {error: 'Email does not exists'})
+      }
+    })
+      .catch((err) => {
+        next(err)
+      })
 })
-.catch((err) => {
-    next(err)
-})
-})
-
-
-router.get('/main', (req, res, next) => {
-    res.render('auth/main.hbs')
-})
-
+// check if the user is logged in
+function checkLoggedIn(req, res, next) {
+    if ( req.session.loggedInUser) {
+      next()
+    } else {
+      res.redirect('/signin')
+    }
+}
+// GET for the profile
 router.get('/profile', (req, res, next) => {
-    res.render('auth/profile.hbs')
+  res.render('auth/profile.hbs')
 })
-router.get("/about", (req, res, next) => {
-    res.render('auth/about.hbs')
+//get for the main
+router.get("/main", (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    let general = jokes.filter(joke => joke.type.includes("general"))
+    let programming = jokes.filter(joke => joke.type.includes("programming"))
+    let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+    res.render('auth/main.hbs', {general, programming, knock, jokes})
+  })
 
-})
+  .catch((err) => {
+    console.log(err)
+  })
+  })
 
 module.exports = router;
