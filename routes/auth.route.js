@@ -69,20 +69,12 @@ const {email, password} = req.body;
 router.get('/main', (req, res, next) => {
     res.render('auth/main.hbs')
 })
-// check if the user is logged in
-function checkLoggedIn(req, res, next) {
-    if ( req.session.loggedInUser) {
-      next()
-    } else {
-      res.redirect('/signin')
-    }
-}
-// GET for the profile
-router.get('/:id', (req, res, next) => {
+
+
+router.get('/profile', (req, res, next) => {
   res.render('auth/profile.hbs')
 })
 
-//get for the main
 router.get("/main", (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
