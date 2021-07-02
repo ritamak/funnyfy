@@ -28,7 +28,7 @@ router.post('/signup', (req, res, next) => {
 
     UserModel.create({username, email, password: hash})
         .then(() => {
-            res.redirect('/profile')
+            res.redirect('/signin')
     })
         .catch((err) => {
             next(err)
@@ -43,20 +43,31 @@ router.get("/signin", (req, res, next) => {
 
 
 router.post('/signin', (req, res, next) => {
-const {email, password} = req.body  
-const salt = bcrypt.genSaltSync(10);
-const hash = bcrypt.hashSync(password, salt);
+const {email, password} = req.body;
+    UserModel.findOne({email})
+    .then((user) => {
+        if(user){
+            let isValid = bcrypt.compareSync(password, user.password);
+            if(isValid == true){
+                res.redirect('/profile')
+            }
+            else {
+                res.render('auth/signin', {error: 'Invalid Password'})
+            }
+        }
+        
+        
 
-UserModel.create({email, password: hash})
-.then(() => {
-    res.redirect('auth/profile.hbs')
-})
-.catch((err) => {
-    next(err)
-})
-})
 
+    })
+    .catch((err) => {
+        next(err)
+    })
+    
 
+    })
+
+    
 router.get('/main', (req, res, next) => {
     res.render('auth/main.hbs')
 })
