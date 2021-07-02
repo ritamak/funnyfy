@@ -32,12 +32,12 @@ router.post('/signup', (req, res, next) => {
     const hash = bcrypt.hashSync(password, salt);
 
     UserModel.create({username, email, password: hash})
-      .then(() => {
-          res.redirect('/profile')
-      })
-      .catch((err) => {
-          next(err)
-      })
+        .then(() => {
+            res.redirect('/signin')
+    })
+        .catch((err) => {
+            next(err)
+    })
 })
 // GET for the SignIn
 router.get("/signin", (req, res, next) => {
@@ -45,25 +45,33 @@ router.get("/signin", (req, res, next) => {
 });
 // POST for the SignIn
 router.post('/signin', (req, res, next) => {
-  const {email, password} = req.body  
-  UserModel.findOne({email})
+const {email, password} = req.body;
+    UserModel.findOne({email})
     .then((user) => {
-      if (user) {
-        let isValid = bcrypt.compareSync( password, user.password);
-        if (isValid) {
-          req.session.loggedInUser = user
-          req.app.locals.isLoggedIn = true;
-          res.redirect('/profile')
-        } else {
-          res.render('auth/signin', {error: 'Invalid password'})
+        if(user){
+            let isValid = bcrypt.compareSync(password, user.password);
+            if(isValid == true){
+                res.redirect('/profile')
+            }
+            else {
+                res.render('auth/signin', {error: 'Invalid Password'})
+            }
         }
-      } else {
-        res.render('auth/signin', {error: 'Email does not exists'})
-      }
+        
+        
+
+
     })
-      .catch((err) => {
+    .catch((err) => {
         next(err)
-      })
+    })
+    
+
+    })
+
+    
+router.get('/main', (req, res, next) => {
+    res.render('auth/main.hbs')
 })
 // check if the user is logged in
 function checkLoggedIn(req, res, next) {
