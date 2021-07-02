@@ -102,3 +102,10 @@ ul li {
   font-weight: bold;
   font-size: 2em;
 }
+
+#cards{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
