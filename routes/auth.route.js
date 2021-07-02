@@ -3,7 +3,7 @@ const UserModel = require('../models/User.model')
 const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model')
 // GET for the about
-router.get("/aboutus", (req, res, next) => {
+router.get("/about", (req, res, next) => {
   res.render('auth/about.hbs')
   })
 // GET for the singUp
