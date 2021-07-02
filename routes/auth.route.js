@@ -51,16 +51,12 @@ const {email, password} = req.body;
         if(user){
             let isValid = bcrypt.compareSync(password, user.password);
             if(isValid == true){
-                res.redirect('/profile')
+                res.redirect('/:id')
             }
             else {
                 res.render('auth/signin', {error: 'Invalid Password'})
             }
         }
-        
-        
-
-
     })
     .catch((err) => {
         next(err)
@@ -82,9 +78,10 @@ function checkLoggedIn(req, res, next) {
     }
 }
 // GET for the profile
-router.get('/profile', (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   res.render('auth/profile.hbs')
 })
+
 //get for the main
 router.get("/main", (req, res, next) => {
   JokeModel.find()
@@ -108,6 +105,20 @@ router.get('/main/programming', (req, res, next) => {
   .catch((err) => {
     console.log(err)
   })})
+
+router.post('/main/programming', (req, res, next)=>{
+  UserModel.findByIdAndUpdate(req.user._id, {$push: {favJokes: req.body.jokeID}})
+  .then(() => {
+    res.redirect("/profile")
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+
+
+
+
 // GET for the general jokes
 router.get('/main/general', (req, res, next) => {
   JokeModel.find()
@@ -130,4 +141,16 @@ router.get('/main/knock-knock', (req, res, next) => {
     console.log(err)
   })})
 
-module.exports = router;
+
+router.get('/main/knock-knock', (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+    res.render('auth/knock-knock.hbs', {knock, jokes})
+  })
+  .catch((err) => {
+    console.log(err)
+  })})
+
+
+  module.exports = router;

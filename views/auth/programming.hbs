@@ -1,20 +1,19 @@
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-indicators">
-  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://f8n-ipfs-production.imgix.net/QmfWtxAM2qwKrEXVoeasArDBrR12qL7HCuD2B4Tqe5R8Bs/nft.jpg?fit=fill&q=100&w=2560" class="d-block w-100" alt="...">
+      <img src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <p>all the jokes!</p>
+        <p id="secondLine">all the jokes</p>
       </div>
     </div>
           {{#each programming}}
     <div class="carousel-item">
-      <img src="https://f8n-ipfs-production.imgix.net/QmfWtxAM2qwKrEXVoeasArDBrR12qL7HCuD2B4Tqe5R8Bs/nft.jpg?fit=fill&q=100&w=2560" class="d-block w-100" alt="...">
+      <img src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>{{this.setup}}</h5>
-        <b5>{{this.punchline}}</h5>
-        <button type="button" class="btn btn-light">Add to favourite</button>
+        <p id="firstLine">{{this.setup}}</p>
+        <p id="secondLine">{{this.punchline}}</p>
+        <button type="button" class="btn btn-light" value="{{this._id}}" onsubmit="return false"><i class="bi bi-bookmark-plus" style="font-size:30px"></i>
+</button>
       </div>
     </div>
             {{/each}}

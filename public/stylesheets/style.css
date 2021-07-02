@@ -106,8 +106,10 @@ ul li {
 #cards{
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: space-around;
+  margin-left: 20vh;
+  margin-right: 20vh;
 }
 
 
@@ -185,16 +187,18 @@ filter: alpha(opacity=70);
   left: 1.8%;
   right: auto;
   width: 96.66666666666666%;
-  color: #fff;
+  color: black;
 }
 
-.header-text h2 {
-  font-size: 40px;
+#firstLine {
+  color: black;
+  font-size: 50px;
 }
 
-.header-text h2 span {
-  background-color: #2980b9;
-padding: 10px;
+#secondLine {
+  background-color: black;
+  font-size: 70px;
+  margin-bottom: 10px;
 }
 
 .header-text h3 span {
@@ -208,14 +212,14 @@ padding: 15px;
 }
 
 .btn-theme {
-  color: #fff;
+  color: black;
   background-color: transparent;
-  border: 2px solid #fff;
+  border: 2px solid black;
   margin-right: 15px;
 }
 
 .btn-theme:hover {
   color: #000;
-  background-color: #fff;
-  border-color: #fff;
+  background-color: black;
+  border-color: black;
 }
