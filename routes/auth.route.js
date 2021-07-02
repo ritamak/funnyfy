@@ -1,12 +1,16 @@
 const router = require("express").Router();
 const UserModel = require('../models/User.model')
 const bcrypt = require('bcryptjs');
-
+const JokeModel = require('../models/Joke.model')
+// GET for the about
+router.get("/aboutus", (req, res, next) => {
+  res.render('auth/about.hbs')
+  })
 // GET for the singUp
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
   })
-// POST for the signIn  
+// POST for the signUp  
 router.post('/signup', (req, res, next) => {
     const {username, email, password} = req.body
     if (!username || !email || !password) {
@@ -35,21 +39,11 @@ router.post('/signup', (req, res, next) => {
           next(err)
       })
 })
-  
-router.get('/profile', (req, res, next) => {
-    res.render('auth/profile.hbs')
-})
-router.get("/about", (req, res, next) => {
-  res.render('auth/about.hbs')
-
-})
-
-
+// GET for the SignIn
 router.get("/signin", (req, res, next) => {
   res.render('auth/signin.hbs');
 });
-
-
+// POST for the SignIn
 router.post('/signin', (req, res, next) => {
   const {email, password} = req.body  
   UserModel.findOne({email})
@@ -71,13 +65,24 @@ router.post('/signin', (req, res, next) => {
         next(err)
       })
 })
-
+// check if the user is logged in
 function checkLoggedIn(req, res, next) {
     if ( req.session.loggedInUser) {
-    next()
-} else {
-    res.redirect('/signin')
+      next()
+    } else {
+      res.redirect('/signin')
+    }
 }
-}
+// GET for the profile
+router.get('/profile', (req, res, next) => {
+  res.render('auth/profile.hbs')
+})
+//get for the main
+router.get("/main", (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    res.render('auth/main.hbs', {jokes})
+  })
+  })
 
 module.exports = router;
