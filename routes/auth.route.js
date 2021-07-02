@@ -51,16 +51,12 @@ const {email, password} = req.body;
         if(user){
             let isValid = bcrypt.compareSync(password, user.password);
             if(isValid == true){
-                res.redirect('/profile')
+                res.redirect('/:id')
             }
             else {
                 res.render('auth/signin', {error: 'Invalid Password'})
             }
         }
-        
-        
-
-
     })
     .catch((err) => {
         next(err)
@@ -101,6 +97,20 @@ router.get('/main/programming', (req, res, next) => {
   .catch((err) => {
     console.log(err)
   })})
+
+router.post('/main/programming', (req, res, next)=>{
+  UserModel.findByIdAndUpdate(req.user._id, {$push: {favJokes: req.body.jokeID}})
+  .then(() => {
+    res.redirect("/profile")
+  })
+  .catch((err) => {
+    console.log(err)
+  })
+})
+
+
+
+
 // GET for the general jokes
 router.get('/main/general', (req, res, next) => {
   JokeModel.find()
@@ -132,5 +142,15 @@ router.get('/jokes', (req, res, next) => {
 })
 
 
+router.get('/main/knock-knock', (req, res, next) => {
+  JokeModel.find()
+  .then((jokes) => {
+    let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+    res.render('auth/knock-knock.hbs', {knock, jokes})
+  })
+  .catch((err) => {
+    console.log(err)
+  })})
 
-module.exports = router;
+
+  module.exports = router;

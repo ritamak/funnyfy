@@ -13,7 +13,8 @@ const userSchema = new Schema({
   email: {
     type: String,
     require: true,
-  }
+  },
+  favJokes: [{type: Schema.Types.ObjectId, ref: 'Joke'}],
 
 });
 
