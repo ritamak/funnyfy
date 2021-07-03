@@ -6,19 +6,19 @@ const JokeModel = require('../models/Joke.model')
 // GET for the about
 router.get("/about", (req, res, next) => {
   res.render('auth/about.hbs')
-  })
+})
 
 // GET for the singUp
 router.get('/signup', (req, res, next) => {
     res.render('auth/signup.hbs')
-  })
+})
   
 // POST for the signUp  
 router.post('/signup', (req, res, next) => {
     const {username, email, password} = req.body
     if (!username || !email || !password) {
-        res.render('auth/signup.hbs', {error: 'Whithout entering all fields you cannot get all jokes'})
-        return;
+      res.render('auth/signup.hbs', {error: 'Whithout entering all fields you cannot get all jokes'})
+      return;
     }
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if ( !re.test(email)) {
@@ -33,12 +33,12 @@ router.post('/signup', (req, res, next) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
     UserModel.create({username, email, password: hash})
-        .then(() => {
-            res.redirect('/signin')
-    })
-        .catch((err) => {
-            next(err)
-    })
+      .then(() => {
+        res.redirect('/signin')
+  })
+      .catch((err) => {
+        next(err)
+  })
 })
 
 // GET for the SignIn
@@ -51,67 +51,32 @@ router.post('/signin', (req, res, next) => {
 const {email, password} = req.body;
     UserModel.findOne({email})
     .then((user) => {
-        if(user){
-          
-            let isValid = bcrypt.compareSync(password, user.password);
-            if(isValid){
-                  req.session.loggedInUser = user;
-                  req.app.locals.isLoggedIn = true;
-                  res.redirect('/profile')
-                
-            }if(isValid == true){
-                res.redirect(`/profile/${user._id}`)
-            }
-
-            else {
-                res.render('auth/signin', {error: 'Invalid Password'})
-            }
+        if(user){          
+          let isValid = bcrypt.compareSync(password, user.password);
+          if(isValid){
+            req.session.loggedInUser = user;
+            req.app.locals.isLoggedIn = true;
+            res.redirect(`/profile/${user._id}`)  
+        } else {
+          res.render('auth/signin', {error: 'Invalid Password'})
         }
-        
+      }    
     })
-
-  
-  
-    
-
-    })
-
-    function checkLoggedIn(req, res, next){
-      if ( req.session.loggedInUser) {
-          next()
-      }
-      else{
-        res.redirect('/signin')
-      }
-    }
-    
-    router.get('/profile', checkLoggedIn, (req, res, next) => {
-          res.render('auth/profile.hbs', {name:  req.session.loggedInUser.username})
-    })
-    router.get('/main', checkLoggedIn, (req, res, next) => {
-      res.render('auth/main.hbs', {name:  req.session.loggedInUser.username})
-  })
-    
-    router.get('/logout', (req, res, next) => {
-        req.session.destroy()
-          req.app.locals.isLoggedIn = false;
-        res.redirect('/')
-    })
-  
-
-    
-
-
+})
 function checkLoggedIn(req, res, next){
   if ( req.session.loggedInUser) {
       next()
-  }
-  else{
+  } else {
     res.redirect('/signin')
   }
 }
 
-
+router.get('/logout', (req, res, next) => {
+    req.session.destroy()
+      req.app.locals.isLoggedIn = false;
+    res.redirect('/')
+})
+  
 // GET to profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   const userId = req.params.id
@@ -124,21 +89,6 @@ router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   })
 })
 
-/*
-router.get("/profile", (req, res, next) => {
-  UserModel.findById(req.user._id)
-  populate("favJokes")
-  .then((user) => {
-    res.render('auth/profile.hbs', {myUser, users, jokes: favJokes})
-  })
-})
-.then(result => {
-  res.status(200).render('profile/profile', {user: result, layout: layout, fav: anyFavorites})
-})
-.catch(error => {
-  res.status(400).render('error', {error: error})
-})
-*/
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
   JokeModel.find()
@@ -151,15 +101,10 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
   .catch((err) => {
     console.log(err)
   })
-  })
+})
  
 // POST add joke
 router.post("/add-joke", checkLoggedIn, (req, res, next) => {
-  console.log(req.body)
-  console.log(req.body.id)
-  console.log(req.body.mongoDBid)
-  console.log(req.session)
-
   if (req.session.loggedInUser) {
     JokeModel.findOne({_id: req.body._id})
     .then((joke) => {
@@ -189,7 +134,8 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
       console.log(err)
     })
   }
-})           
+})   
+        
 // GET for the general jokes
 router.get('/main/general', checkLoggedIn, (req, res, next) => {
   let myUserId = req.session.loggedInUser._id
