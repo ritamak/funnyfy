@@ -52,21 +52,55 @@ const {email, password} = req.body;
     UserModel.findOne({email})
     .then((user) => {
         if(user){
+          
             let isValid = bcrypt.compareSync(password, user.password);
-            if(isValid == true){
-              req.session.loggedInUser = user
-              req.app.locals.isLoggedIn = true;              
-              res.redirect(`/profile/${user._id}`)
+            if(isValid){
+                  req.session.loggedInUser = user;
+                  req.app.locals.isLoggedIn = true;
+                  res.redirect('/profile')
+                
+            }if(isValid == true){
+                res.redirect(`/profile/${user._id}`)
             }
+
             else {
                 res.render('auth/signin', {error: 'Invalid Password'})
             }
         }
+        
     })
-    .catch((err) => {
-        next(err)
-    })  
-})
+
+  
+  
+    
+
+    })
+
+    function checkLoggedIn(req, res, next){
+      if ( req.session.loggedInUser) {
+          next()
+      }
+      else{
+        res.redirect('/signin')
+      }
+    }
+    
+    router.get('/profile', checkLoggedIn, (req, res, next) => {
+          res.render('auth/profile.hbs', {name:  req.session.loggedInUser.username})
+    })
+    router.get('/main', checkLoggedIn, (req, res, next) => {
+      res.render('auth/main.hbs', {name:  req.session.loggedInUser.username})
+  })
+    
+    router.get('/logout', (req, res, next) => {
+        req.session.destroy()
+          req.app.locals.isLoggedIn = false;
+        res.redirect('/')
+    })
+  
+
+    
+
 
 function checkLoggedIn(req, res, next){
   if ( req.session.loggedInUser) {
@@ -90,6 +124,21 @@ router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   })
 })
 
+/*
+router.get("/profile", (req, res, next) => {
+  UserModel.findById(req.user._id)
+  populate("favJokes")
+  .then((user) => {
+    res.render('auth/profile.hbs', {myUser, users, jokes: favJokes})
+  })
+})
+.then(result => {
+  res.status(200).render('profile/profile', {user: result, layout: layout, fav: anyFavorites})
+})
+.catch(error => {
+  res.status(400).render('error', {error: error})
+})
+*/
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
   JokeModel.find()
