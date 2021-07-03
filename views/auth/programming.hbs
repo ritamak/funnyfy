@@ -6,9 +6,10 @@
     <div class="carousel-item active">
       <img src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <p id="secondLine">jokes</p>
+        <p id="secondLine">all the jokes</p>
       </div>
-     {{#each programming}}
+    </div>
+    {{#each programming}}
     <div class="carousel-item">
       <img src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" alt="...">
       <div class="carousel-caption d-none d-md-block">
@@ -16,7 +17,7 @@
         <p id="secondLine">{{this.punchline}}</p>
         <form action="/add-joke" method="POST" class="form-group">
         <div style="display: none">
-        <input type="text" name="mongoDBid" value={{this._id}}>
+        <input type="text" name="_id" value={{this._id}}>
         <input type="text" name="id" value={{this.id}}>
         <input type="text" name="type" value={{this.type}}>
         <input type="text" name="setup" value={{this.setup}}>
