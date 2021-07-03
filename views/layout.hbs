@@ -19,10 +19,10 @@
       <nav>
          <ul>
             <li id="to-left">
-            <a href="/" title="home"><i class="bi bi-house" style="font-size:48px"></i></a>
+            <a href="/" title="home"><i class="bi bi-house" style="font-size:40px"></i></a>
             </li>
 
-            {{#if isValid }}
+            {{#if isLoggedIn }}
                <li id="to-right">
                      <a href="/logout">Logout</a> <span> | </span>
                </li>
@@ -34,7 +34,7 @@
                   <a href="/signin">SignIn</a> <span> | </span>
                </li>
                <li id="to-right">
-               <a href="/about" title="profile"><i class="bi bi-card-heading" style="font-size:48px"></i></a>
+               <a href="/about" title="About"><i class="bi bi-card-heading" style="font: size 38px"></i></a>
                </li>
             {{/if}}
          </ul>
