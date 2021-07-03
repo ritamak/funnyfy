@@ -2,6 +2,8 @@ const router = require("express").Router();
 const UserModel = require('../models/User.model')
 const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model')
+// test
+const session = require('express-session');
 
 // GET for the about
 router.get("/about", (req, res, next) => {
@@ -67,7 +69,6 @@ const {email, password} = req.body;
 })
 
 // GET to profile
-
 router.get('/profile/:id', (req, res, next) => {
   const userId = req.params.id
   UserModel.find()
@@ -79,21 +80,6 @@ router.get('/profile/:id', (req, res, next) => {
   })
 })
 
-/*
-router.get("/profile", (req, res, next) => {
-  UserModel.findById(req.user._id)
-  populate("favJokes")
-  .then((user) => {
-    res.render('auth/profile.hbs', {myUser, users, jokes: favJokes})
-  })
-})
-.then(result => {
-  res.status(200).render('profile/profile', {user: result, layout: layout, fav: anyFavorites})
-})
-.catch(error => {
-  res.status(400).render('error', {error: error})
-})
-*/
 // GET main
 router.get("/main", (req, res, next) => {
   JokeModel.find()
@@ -113,6 +99,7 @@ router.post("/add-joke", (req, res, next) => {
   console.log(req.body)
   console.log(req.body.id)
   console.log(req.body.mongoDBid)
+  console.log(req.session.userid)
 
   if (req.user) {
     JokeModel.findOne({mongoDBid: req.body.mongoDBid})
