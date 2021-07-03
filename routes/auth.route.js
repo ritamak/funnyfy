@@ -55,7 +55,8 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
       let general = jokes.filter(joke => joke.type.includes("general"))
       let programming = jokes.filter(joke => joke.type.includes("programming"))
       let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
-      res.render('auth/main.hbs', {general, programming, knock, jokes})
+      let myUserId = req.session.loggedInUser._id
+      res.render('auth/main.hbs', {general, programming, knock, jokes, myUserId})
     })
     .catch((err) => {
       console.log(err)
@@ -196,5 +197,8 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
     })
   }
 })   
+
+
         
- module.exports = router;
+
+module.exports = router;
