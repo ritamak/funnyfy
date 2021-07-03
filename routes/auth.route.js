@@ -37,13 +37,19 @@ router.get('/logout', (req, res, next) => {
 
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
-const userId = req.params.id
-UserModel.find()
-.populate("favJokes")
-.then((users) => {
+  const userId = req.params.id
+  UserModel.find()
+  .populate("favJokes")
+  .then((users) => {
   let myUser = users.find(user => user._id == userId)
-  console.log(myUser)
-  res.render('auth/profile.hbs', {myUser, users})
+  let favs = myUser.favJokes
+  console.log(favs)
+  let punchlines = myUser.favJokes.map((joke) => {
+    let jokestoprint = `${joke.setup}, ${joke.punchline}`
+    return jokestoprint
+  });
+  console.log(punchlines)
+    res.render('auth/profile.hbs', {myUser, users, userId, punchlines})
   })
 })
 
@@ -55,7 +61,8 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
       let general = jokes.filter(joke => joke.type.includes("general"))
       let programming = jokes.filter(joke => joke.type.includes("programming"))
       let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
-      res.render('auth/main.hbs', {general, programming, knock, jokes})
+      let myUserId = req.session.loggedInUser._id
+      res.render('auth/main.hbs', {general, programming, knock, jokes, myUserId})
     })
     .catch((err) => {
       console.log(err)
