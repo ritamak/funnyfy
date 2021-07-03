@@ -17,8 +17,8 @@ router.get('/signup', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
     const {username, email, password} = req.body
     if (!username || !email || !password) {
-        res.render('auth/signup.hbs', {error: 'Whithout entering all fields you cannot get all jokes'})
-        return;
+      res.render('auth/signup.hbs', {error: 'Whithout entering all fields you cannot get all jokes'})
+      return;
     }
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if ( !re.test(email)) {
@@ -33,12 +33,12 @@ router.post('/signup', (req, res, next) => {
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
     UserModel.create({username, email, password: hash})
-        .then(() => {
-            res.redirect('/signin')
-    })
-        .catch((err) => {
-            next(err)
-    })
+      .then(() => {
+        res.redirect('/signin')
+  })
+      .catch((err) => {
+        next(err)
+  })
 })
 
 // GET for the SignIn
@@ -49,6 +49,7 @@ router.get("/signin", (req, res, next) => {
 // POST for the SignIn
 router.post('/signin', (req, res, next) => {
 const {email, password} = req.body;
+<<<<<<< HEAD
   UserModel.findOne({email})
   .then((user) => {
       if(user){         
@@ -64,6 +65,22 @@ const {email, password} = req.body;
   })
 })
 
+=======
+    UserModel.findOne({email})
+    .then((user) => {
+        if(user){          
+          let isValid = bcrypt.compareSync(password, user.password);
+          if(isValid){
+            req.session.loggedInUser = user;
+            req.app.locals.isLoggedIn = true;
+            res.redirect(`/profile/${user._id}`)  
+        } else {
+          res.render('auth/signin', {error: 'Invalid Password'})
+        }
+      }    
+    })
+})
+>>>>>>> 68504c5c3a162b04fd4f370a7828d0c7de112884
 function checkLoggedIn(req, res, next){
   if ( req.session.loggedInUser) {
       next()
@@ -71,10 +88,17 @@ function checkLoggedIn(req, res, next){
     res.redirect('/signin')
   }
 }
+<<<<<<< HEAD
       
 router.get('/logout', (req, res, next) => {
     req.session.destroy()
     req.app.locals.isLoggedIn = false;
+=======
+
+router.get('/logout', (req, res, next) => {
+    req.session.destroy()
+      req.app.locals.isLoggedIn = false;
+>>>>>>> 68504c5c3a162b04fd4f370a7828d0c7de112884
     res.redirect('/')
 })
   
@@ -135,8 +159,13 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
       console.log(err)
     })
   }
+<<<<<<< HEAD
 })           
 
+=======
+})   
+        
+>>>>>>> 68504c5c3a162b04fd4f370a7828d0c7de112884
 // GET for the general jokes
 router.get('/main/general', checkLoggedIn, (req, res, next) => {
   let myUserId = req.session.loggedInUser._id
