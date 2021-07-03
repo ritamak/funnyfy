@@ -37,13 +37,19 @@ router.get('/logout', (req, res, next) => {
 
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
-const userId = req.params.id
-UserModel.find()
-.populate("favJokes")
-.then((users) => {
+  const userId = req.params.id
+  UserModel.find()
+  .populate("favJokes")
+  .then((users) => {
   let myUser = users.find(user => user._id == userId)
-  console.log(myUser)
-  res.render('auth/profile.hbs', {myUser, users})
+  let favs = myUser.favJokes
+  console.log(favs)
+  let punchlines = myUser.favJokes.map((joke) => {
+    let jokestoprint = `${joke.setup}, ${joke.punchline}`
+    return jokestoprint
+  });
+  console.log(punchlines)
+    res.render('auth/profile.hbs', {myUser, users, userId, punchlines})
   })
 })
 
