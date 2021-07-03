@@ -191,10 +191,11 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
 })           
 // GET for the general jokes
 router.get('/main/general', checkLoggedIn, (req, res, next) => {
+  let myUserId = req.session.loggedInUser._id
   JokeModel.find()
   .then((jokes) => {
     let general = jokes.filter(joke => joke.type.includes("general"))
-    res.render('auth/general.hbs', {general, jokes})
+    res.render('auth/general.hbs', {general, jokes, myUserId})
   })
   .catch((err) => {
     console.log(err)
@@ -215,10 +216,11 @@ router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
 
 // GET for the programming jokes
 router.get('/main/programming', checkLoggedIn, (req, res, next) => {
+  let myUserId = req.session.loggedInUser._id
   JokeModel.find()
   .then((jokes) => {
     let programming = jokes.filter(joke => joke.type.includes("programming"))
-    res.render('auth/programming.hbs', {programming, jokes})
+    res.render('auth/programming.hbs', {programming, jokes, myUserId})
   })
   .catch((err) => {
     console.log(err)
