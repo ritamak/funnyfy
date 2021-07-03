@@ -57,7 +57,7 @@ const {email, password} = req.body;
             if(isValid){
                   req.session.loggedInUser = user;
                   req.app.locals.isLoggedIn = true;
-                  res.redirect('/profile')
+                  res.redirect(`/profile/${user._id}`)
                 
             }if(isValid == true){
                 res.redirect(`/profile/${user._id}`)
@@ -68,6 +68,9 @@ const {email, password} = req.body;
             }
         }
         
+    })
+    .catch((err) => {
+      next(err)
     })
 
   
@@ -85,12 +88,7 @@ const {email, password} = req.body;
       }
     }
     
-    router.get('/profile', checkLoggedIn, (req, res, next) => {
-          res.render('auth/profile.hbs', {name:  req.session.loggedInUser.username})
-    })
-    router.get('/main', checkLoggedIn, (req, res, next) => {
-      res.render('auth/main.hbs', {name:  req.session.loggedInUser.username})
-  })
+
     
     router.get('/logout', (req, res, next) => {
         req.session.destroy()
@@ -141,6 +139,8 @@ router.get("/profile", (req, res, next) => {
 */
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
+  if(req.session.loggedInUser = true){
+    
   JokeModel.find()
   .then((jokes) => {
     let general = jokes.filter(joke => joke.type.includes("general"))
@@ -148,17 +148,16 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
     let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
     res.render('auth/main.hbs', {general, programming, knock, jokes})
   })
+
   .catch((err) => {
     console.log(err)
   })
-  })
- 
+  }
+})
+
 // POST add joke
 router.post("/add-joke", checkLoggedIn, (req, res, next) => {
-  console.log(req.body)
-  console.log(req.body.id)
-  console.log(req.body.mongoDBid)
-  console.log(req.session)
+
 
   if (req.session.loggedInUser) {
     JokeModel.findOne({_id: req.body._id})
