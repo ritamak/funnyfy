@@ -1,5 +1,5 @@
 <a href="/main" title="main"><i class="bi bi-chevron-left" style="font-size:48px"></i></a>
-<a href="/profile" title="profile"><i class="bi bi-person-square" style="font-size:48px"></i></a>
+<a href="/profile/{{myUserId}}" title="profile"><i class="bi bi-person-square" style="font-size:48px"></i></a>
 
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -17,7 +17,7 @@
         <p id="secondLine">{{this.punchline}}</p>
         <form action="/add-joke" method="POST" class="form-group">
         <div style="display: none">
-        <input type="text" name="mongoDBid" value={{this._id}}>
+        <input type="text" name="_id" value={{this._id}}>
         <input type="text" name="id" value={{this.id}}>
         <input type="text" name="type" value={{this.type}}>
         <input type="text" name="setup" value={{this.setup}}>

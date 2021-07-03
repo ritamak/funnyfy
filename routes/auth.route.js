@@ -102,9 +102,18 @@ const {email, password} = req.body;
     
 
 
-// GET to profile
+function checkLoggedIn(req, res, next){
+  if ( req.session.loggedInUser) {
+      next()
+  }
+  else{
+    res.redirect('/signin')
+  }
+}
 
-router.get('/profile/:id', (req, res, next) => {
+
+// GET to profile
+router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   const userId = req.params.id
   UserModel.find()
   .populate("favJokes")
@@ -131,7 +140,7 @@ router.get("/profile", (req, res, next) => {
 })
 */
 // GET main
-router.get("/main", (req, res, next) => {
+router.get("/main", checkLoggedIn, (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
     let general = jokes.filter(joke => joke.type.includes("general"))
@@ -145,36 +154,36 @@ router.get("/main", (req, res, next) => {
   })
  
 // POST add joke
-router.post("/add-joke", (req, res, next) => {
+router.post("/add-joke", checkLoggedIn, (req, res, next) => {
   console.log(req.body)
   console.log(req.body.id)
   console.log(req.body.mongoDBid)
+  console.log(req.session)
 
-  if (req.user) {
-    JokeModel.findOne({mongoDBid: req.body.mongoDBid})
+  if (req.session.loggedInUser) {
+    JokeModel.findOne({_id: req.body._id})
     .then((joke) => {
       if (!joke) {
         JokeModel.create(req.body)
         .then((newJoke) => {
-          UserModel.findByIdAndUpdate(req.user._id, {$push: {favJokes: newJoke._id}})
+          UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favJokes: newJoke._id}})
           .then(() => {
             console.log("joke created")
           })
         })
       } else {
-        UserModel.findById(req.user._id)
+        UserModel.findById(req.session.loggedInUser._id)
         .then((user) => {
           if (user.favJokes.includes(joke._id)) {
             console.log("joke already exits in favJokes")
           } else {
-            UserModel.findByIdAndUpdate(req.user._id, {$push: {favJokes: joke.id}})
+            UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favJokes: joke._id}})
             .then(() => {
               console.log("added to favJokes")
             })
           }
         })
       }
-
     })
     .catch((err) => {
       console.log(err)
@@ -182,7 +191,7 @@ router.post("/add-joke", (req, res, next) => {
   }
 })           
 // GET for the general jokes
-router.get('/main/general', (req, res, next) => {
+router.get('/main/general', checkLoggedIn, (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
     let general = jokes.filter(joke => joke.type.includes("general"))
@@ -194,18 +203,19 @@ router.get('/main/general', (req, res, next) => {
 })
 
 // GET for knock knock
-router.get('/main/knock-knock', (req, res, next) => {
+router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
+  let myUserId = req.session.loggedInUser._id
   JokeModel.find()
   .then((jokes) => {
     let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
-    res.render('auth/knock-knock.hbs', {knock, jokes})
+    res.render('auth/knock-knock.hbs', {knock, jokes, myUserId})
   })
   .catch((err) => {
     console.log(err)
   })})
 
 // GET for the programming jokes
-router.get('/main/programming', (req, res, next) => {
+router.get('/main/programming', checkLoggedIn, (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
     let programming = jokes.filter(joke => joke.type.includes("programming"))
