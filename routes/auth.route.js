@@ -50,6 +50,7 @@ router.get("/signin", (req, res, next) => {
 router.post('/signin', (req, res, next) => {
 const {email, password} = req.body;
 <<<<<<< HEAD
+<<<<<<< HEAD
   UserModel.findOne({email})
   .then((user) => {
       if(user){         
@@ -64,6 +65,58 @@ const {email, password} = req.body;
     }
   })
 })
+=======
+    UserModel.findOne({email})
+    .then((user) => {
+        if(user){
+          
+            let isValid = bcrypt.compareSync(password, user.password);
+            if(isValid){
+                  req.session.loggedInUser = user;
+                  req.app.locals.isLoggedIn = true;
+                  res.redirect(`/profile/${user._id}`)
+                
+            }if(isValid == true){
+                res.redirect(`/profile/${user._id}`)
+            }
+
+            else {
+                res.render('auth/signin', {error: 'Invalid Password'})
+            }
+        }
+        
+    })
+    .catch((err) => {
+      next(err)
+    })
+
+  
+  
+    
+
+    })
+
+    function checkLoggedIn(req, res, next){
+      if ( req.session.loggedInUser) {
+          next()
+      }
+      else{
+        res.redirect('/signin')
+      }
+    }
+    
+
+    
+    router.get('/logout', (req, res, next) => {
+        req.session.destroy()
+          req.app.locals.isLoggedIn = false;
+        res.redirect('/')
+    })
+  
+
+    
+
+>>>>>>> f584c25edf5c67aab88ca1d38e4ce8ac34ca88ce
 
 =======
     UserModel.findOne({email})
@@ -116,6 +169,8 @@ router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
 
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
+  if(req.session.loggedInUser = true){
+    
   JokeModel.find()
   .then((jokes) => {
     let general = jokes.filter(joke => joke.type.includes("general"))
@@ -123,13 +178,24 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
     let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
     res.render('auth/main.hbs', {general, programming, knock, jokes})
   })
+
   .catch((err) => {
     console.log(err)
   })
+<<<<<<< HEAD
 })
  
 // POST add joke
 router.post("/add-joke", checkLoggedIn, (req, res, next) => {
+=======
+  }
+})
+
+// POST add joke
+router.post("/add-joke", checkLoggedIn, (req, res, next) => {
+
+
+>>>>>>> f584c25edf5c67aab88ca1d38e4ce8ac34ca88ce
   if (req.session.loggedInUser) {
     JokeModel.findOne({_id: req.body._id})
     .then((joke) => {
