@@ -49,7 +49,7 @@ UserModel.find()
 
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
-  if(req.session.loggedInUser = true) {    
+  if (req.session.loggedInUser) {
     JokeModel.find()
     .then((jokes) => {
       let general = jokes.filter(joke => joke.type.includes("general"))
@@ -61,12 +61,13 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
       console.log(err)
     })
   } else {
-    console.log("you don't have acess")
+    console.log("you dont have acess")
   }
 })
 
-// GET general jokes
+// GET main / general
 router.get('/main/general', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id
   JokeModel.find()
   .then((jokes) => {
@@ -76,10 +77,14 @@ router.get('/main/general', checkLoggedIn, (req, res, next) => {
   .catch((err) => {
     console.log(err)
   })
+  } else {
+    console.log("you don't have acess")
+  }
 })
 
-// GET knock knock jokes
+// GET main / knock knock 
 router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id
   JokeModel.find()
   .then((jokes) => {
@@ -88,10 +93,15 @@ router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
   })
   .catch((err) => {
     console.log(err)
-  })})
+  })
+  } else {
+  console.log("you dont have acess")
+  }
+})
 
-// GET for the programming jokes
+// GET main / programming
 router.get('/main/programming', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id
   JokeModel.find()
   .then((jokes) => {
@@ -100,7 +110,11 @@ router.get('/main/programming', checkLoggedIn, (req, res, next) => {
   })
   .catch((err) => {
     console.log(err)
-  })})
+  })
+  } else {
+    console.log("you don't have acess")
+  }
+})
 
 // -------------- POST ------------
 
@@ -126,10 +140,10 @@ router.post('/signup', (req, res, next) => {
     UserModel.create({username, email, password: hash})
       .then(() => {
         res.redirect('/signin')
-  })
+       })
       .catch((err) => {
         next(err)
-  })
+      })
 })
 
 // POST signIn
@@ -149,6 +163,7 @@ const {email, password} = req.body;
       }    
     })
 })
+
 // POST add joke
 router.post("/add-joke", checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
