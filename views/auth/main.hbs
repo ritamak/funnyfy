@@ -1,10 +1,39 @@
+<!-- Profile BUTTON -->
 <a href="/profile/{{myUserId}}" title="profile"><i class="bi bi-person-square" style="font-size:48px"></i></a>
-    <div class="search-container">
-    <form action="/GET">
-      <input type="text" placeholder="Search.." name="search">
-      <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
-  </div>
+<!-- TITLE -->
+<h1>Joke library</h1>
+<br>
+<!-- GET RANDOM JOKE -->
+<h2>Joke for the coders</h2>
+{{#each jokeProgramming}}
+<h3>{{this.setup}}</h3>
+<br>
+<h4>{{this.punchline}}</h4>
+{{/each}}
+<br>
+<h2>Knock-knock joke</h2>
+{{#each jokeKnock}}
+<h3>{{this.setup}}</h3>
+<br>
+<h4>{{this.punchline}}</h4>
+{{/each}}
+<br>
+<h2>Joke for all</h2>
+{{#each jokeGeneral}}
+<h3>{{this.setup}}</h3>
+<br>
+<h4>{{this.punchline}}</h4>
+{{/each}}
+<br>
+<!-- SEARCH FOR JOKES -->
+<br>
+<div class="search-container">
+<form action="/GET">
+  <input type="text" placeholder="Search.." name="search">
+  <button type="submit"><i class="fa fa-search"></i></button>
+</form>
+</div>
+<!-- COLLECTION OF JOKES -->
 <div id="cards">
 <div class="card" style="width: 10rem;">
   <img src="https://ichef.bbci.co.uk/news/976/cpsprodpb/12EBD/production/_84810577_lol_yellow_thinkstock.jpg" class="card-img-top" alt="lol image">
@@ -14,7 +43,6 @@
     <a href="/main/general" title="profile"><i class="bi bi-caret-right-fill" style="font-size:48px"></i></a>
   </div>
 </div>
-
 <br>
 <div class="card" style="width: 10rem;">
   <img src="https://www.codecademy.com/resources/blog/content/images/2020/08/what-programming-language-should-i-learn.png" class="card-img-top" alt="code image">

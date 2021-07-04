@@ -1,28 +1,23 @@
+<!-- MAIN BUTTON -->
 <a href="/main" title="main"><i class="bi bi-columns-gap" style="font-size:48px"></i></a>
+<!-- TITLE -->
 <h1>Hello {{myUser.username}} Welcome to your private page!</h1>
 <br>
-<<<<<<< HEAD
-  <p>username: {{user.username}}</p>
-  <p>email: {{user.email}}</p>
+<!-- PROFILE INFO & EDIT -->
+<p>username: {{user.username}}</p>
+<p>email: {{user.email}}</p>
 <br>
 <a href="/main" title="main"><i class="bi bi-gear" style="font-size:48px"></i></a>
 <br>
+<!-- FAVORITE JOKES -->
 <h4>Your Favorite Jokes</h4>
 <br>
 {{#each user.favJokes}}
-  <h4>{{this.setup}}</h4>
-  <p>{{this.punchline}}</p>
-  <br>
-  <form action="/{{this._id}}/delete" method="POST">
-  <button type="submit" onsubmit="return false"><i class="bi bi-x-square" style="font-size:48px"></i></button>
+<h4>{{this.setup}}</h4>
+<p>{{this.punchline}}</p>
+<br>
+<!-- DELETE BUTTON -->
+<form action="/{{this._id}}/delete" method="POST">
+<button type="submit" onsubmit="return false"><i class="bi bi-x-square" style="font-size:48px"></i></button>
 </form>
 {{/each}}
-<br>
-
-=======
-<br>
-{{myUser.username}}
-<br>
-<br>
-{{myUser.favJokes}}
->>>>>>> c33a2f1655f8ef82c23823ca535eb87d1bd23b89
