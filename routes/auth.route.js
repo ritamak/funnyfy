@@ -147,7 +147,7 @@ router.post('/signup', (req, res, next) => {
     UserModel.create({username, email, password: hash})
       .then(() => {
         res.redirect('/signin')
-       })
+        })
       .catch((err) => {
         next(err)
       })
@@ -203,7 +203,6 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
     })
   }
 })   
-
 
         
 
