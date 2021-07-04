@@ -37,20 +37,29 @@ router.get('/logout', (req, res, next) => {
 
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
-  const userId = req.params.id
-  UserModel.find()
+  if (req.session.loggedInUser) {
+  const userId = req.session.loggedInUser._id
+  UserModel.findById(userId)
   .populate("favJokes")
-  .then((users) => {
-  let myUser = users.find(user => user._id == userId)
-  let favs = myUser.favJokes
+  .then((user) => {
+
+    //let myUser = user.find(user => user._id == userId)
+    /*
   console.log(favs)
-  let punchlines = myUser.favJokes.map((joke) => {
-    let jokestoprint = `${joke.setup}, ${joke.punchline}`
+  let punchlines = user.favJokes.map((joke) => {
+     let jokestoprint = [`${joke.setup}, ${joke.punchline}`]
     return jokestoprint
   });
   console.log(punchlines)
-    res.render('auth/profile.hbs', {myUser, users, userId, punchlines})
+  */
+    res.render('auth/profile.hbs', {user})
   })
+  .catch((err) => {
+    console.log(err)
+  })
+  } else {
+    console.log("you don't have acess")
+  }
 })
 
 // GET main
@@ -203,5 +212,16 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
     })
   }
 })   
-        
+
+// POST delete favorites
+router.post('/:id/delete', (req, res, next) => {
+  const { id } = req.params
+  let myUserId = req.session.loggedInUser._id
+  console.log(myUserId)
+  console.log
+  JokeModel.findByIdAndDelete(id)
+  .then(() => res.redirect(`/profile/${myUserId}`)) 
+  .catch((err) => console.log(err));
+})
+
  module.exports = router;
