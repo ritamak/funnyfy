@@ -1,27 +1,29 @@
+// REQUIRED
 const router = require("express").Router();
-const UserModel = require('../models/User.model')
+const UserModel = require('../models/User.model');
 const bcrypt = require('bcryptjs');
-const JokeModel = require('../models/Joke.model')
+const JokeModel = require('../models/Joke.model');
 
 // function to private / public
 function checkLoggedIn(req, res, next){
   if ( req.session.loggedInUser) {
-      next()
+      next();
   } else {
-    res.redirect('/signin')
+    res.redirect('/signin');
   }
-}
+};
+
 // ------------------------------- GET -----------------------------------
 
 // GET about
 router.get("/about", (req, res, next) => {
-  res.render('auth/about.hbs')
-})
+  res.render('auth/about.hbs');
+});
 
 // GET singUp
 router.get('/signup', (req, res, next) => {
-    res.render('auth/signup.hbs')
-})
+    res.render('auth/signup.hbs');
+});
 
 // GET SignIn
 router.get("/signin", (req, res, next) => {
@@ -30,98 +32,118 @@ router.get("/signin", (req, res, next) => {
 
 // GET logOut
 router.get('/logout', (req, res, next) => {
-  req.session.destroy()
+  req.session.destroy();
     req.app.locals.isLoggedIn = false;
-  res.redirect('/')
-})
+  res.redirect('/');
+});
 
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
-  const userId = req.params.id
-  UserModel.find()
+  if (req.session.loggedInUser) {
+  const userId = req.session.loggedInUser._id;
+  UserModel.findById(userId)
   .populate("favJokes")
-  .then((users) => {
-  let myUser = users.find(user => user._id == userId)
-  let favs = myUser.favJokes
+  .then((user) => {
+    //let myUser = user.find(user => user._id == userId)
+    /*
   console.log(favs)
-  let punchlines = myUser.favJokes.map((joke) => {
-    let jokestoprint = `${joke.setup}, ${joke.punchline}`
+  let punchlines = user.favJokes.map((joke) => {
+     let jokestoprint = [`${joke.setup}, ${joke.punchline}`]
     return jokestoprint
   });
   console.log(punchlines)
-    res.render('auth/profile.hbs', {myUser, users, userId, punchlines})
+  */
+    res.render('auth/profile.hbs', {user});
   })
-})
+  .catch((err) => {
+    console.log(err);
+  })
+  } else {
+    console.log("you don't have acess");
+  }
+});
 
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
     JokeModel.find()
     .then((jokes) => {
-      let general = jokes.filter(joke => joke.type.includes("general"))
-      let programming = jokes.filter(joke => joke.type.includes("programming"))
-      let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+      let general = jokes.filter(joke => joke.type.includes("general"));
+      let programming = jokes.filter(joke => joke.type.includes("programming"));
+      let knock = jokes.filter(joke => joke.type.includes("knock-knock"));
       let myUserId = req.session.loggedInUser._id
-      res.render('auth/main.hbs', {general, programming, knock, jokes, myUserId})
+      const randomJoke = () => {
+        return jokes[Math.floor(Math.random() * jokes.length)];
+      };
+      const jokeProgramming = (type, n) => {
+        return randomJoke(jokes.filter(joke => joke.type === "programming"), 1);
+      };
+      const jokeGeneral = (type, n) => {
+        return randomJoke(jokes.filter(joke => joke.type === "general"), 1);
+      };
+      const jokeKnock = (type, n) => {
+        return randomJoke(jokes.filter(joke => joke.type === "knock-knock"), 1);
+      };
+      res.render('auth/main.hbs', {general, programming, knock, jokes, myUserId, randomJoke, jokeProgramming, jokeGeneral, jokeKnock})
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
     })
   } else {
-    console.log("you dont have acess")
+    console.log("you dont have acess");
   }
-})
+});
 
 // GET main / general
 router.get('/main/general', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  let myUserId = req.session.loggedInUser._id
+  let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
-    let general = jokes.filter(joke => joke.type.includes("general"))
-    res.render('auth/general.hbs', {general, jokes, myUserId})
+    let general = jokes.filter(joke => joke.type.includes("general"));
+    res.render('auth/general.hbs', {general, jokes, myUserId});
   })
   .catch((err) => {
-    console.log(err)
+    console.log(err);
   })
   } else {
-    console.log("you don't have acess")
+    console.log("you don't have acess");
   }
-})
+});
 
 // GET main / knock knock 
 router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  let myUserId = req.session.loggedInUser._id
+  let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
-    let knock = jokes.filter(joke => joke.type.includes("knock-knock"))
+    let knock = jokes.filter(joke => joke.type.includes("knock-knock"));
     res.render('auth/knock-knock.hbs', {knock, jokes, myUserId})
   })
   .catch((err) => {
     console.log(err)
   })
   } else {
-  console.log("you dont have acess")
+  console.log("you dont have acess");
   }
-})
+});
 
 // GET main / programming
 router.get('/main/programming', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  let myUserId = req.session.loggedInUser._id
+  let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
-    let programming = jokes.filter(joke => joke.type.includes("programming"))
+    let programming = jokes.filter(joke => joke.type.includes("programming"));
     res.render('auth/programming.hbs', {programming, jokes, myUserId})
   })
   .catch((err) => {
-    console.log(err)
+    console.log(err);
   })
   } else {
-    console.log("you don't have acess")
+    console.log("you don't have acess");
   }
-})
+});
 
 // -------------- POST ------------
 
@@ -146,12 +168,12 @@ router.post('/signup', (req, res, next) => {
     const hash = bcrypt.hashSync(password, salt);
     UserModel.create({username, email, password: hash})
       .then(() => {
-        res.redirect('/signin')
+        res.redirect('/signin');
         })
       .catch((err) => {
-        next(err)
+        next(err);
       })
-})
+});
 
 // POST signIn
 router.post('/signin', (req, res, next) => {
@@ -165,11 +187,11 @@ const {email, password} = req.body;
             req.app.locals.isLoggedIn = true;
             res.redirect(`/profile/${user._id}`)  
         } else {
-          res.render('auth/signin', {error: 'Invalid Password'})
+          res.render('auth/signin', {error: 'Invalid Password'});
         }
       }    
     })
-})
+});
 
 // POST add joke
 router.post("/add-joke", checkLoggedIn, (req, res, next) => {
@@ -181,41 +203,43 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
         .then((newJoke) => {
           UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favJokes: newJoke._id}})
           .then(() => {
-            console.log("joke created")
+            console.log("joke created");
           })
         })
       } else {
         UserModel.findById(req.session.loggedInUser._id)
         .then((user) => {
           if (user.favJokes.includes(joke._id)) {
-            console.log("joke already exits in favJokes")
+            console.log("joke already exits in favJokes");
           } else {
             UserModel.findByIdAndUpdate(req.session.loggedInUser._id, {$push: {favJokes: joke._id}})
             .then(() => {
-              console.log("added to favJokes")
+              console.log("added to favJokes");
             })
           }
         })
       }
     })
     .catch((err) => {
-      console.log(err)
+      console.log(err);
     })
   }
 })   
-router.get('/profile/:id/edit', (req, res, next) => {
-  let myProfileId = req.params.id
-
-    UserModel.findById(myProfileId)
+router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
+  const userId = req.session.loggedInUser._id;
+  UserModel.findById(userId)
     .then((profile) => {
-
-        res.render('/edit-profile.hbs', {profile})
+      res.render('/edit-profile.hbs', {profile})
     })
+  
     .catch(() => {
         next('Cannot find drone')
     })
-});
-
+} 
+})
+    
+  
 router.post('/profile/:id/edit', (req, res, next) => {
   let myProfileId = req.params.id
 
@@ -230,5 +254,17 @@ router.post('/profile/:id/edit', (req, res, next) => {
     })
 });
         
+
+
+
+// POST delete favorites
+router.post('/:id/delete', (req, res, next) => {
+  const { id } = req.params;
+  let myUserId = req.session.loggedInUser._id;
+  console.log(myUserId)
+  JokeModel.findByIdAndDelete(id)
+  .then(() => res.redirect(`/profile/${myUserId}`)) 
+  .catch((err) => console.log(err));
+});
 
 module.exports = router;
