@@ -148,13 +148,12 @@ router.get('/main/programming', checkLoggedIn, (req, res, next) => {
 // GET edit profile
 router.get('/profile/:id/edit', (req, res, next) => {
   let myProfileId = req.params.id
-    UserModel.findById(myProfileId)
+  UserModel.findById(myProfileId)
     .then((profile) => {
-
-        res.render('/edit-profile.hbs', {profile})
+      res.render('/edit-profile.hbs', {profile})
     })
     .catch(() => {
-        next('Cannot find drone')
+      next('Cannot find drone')
     })
 });
 
