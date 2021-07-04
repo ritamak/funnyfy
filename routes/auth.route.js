@@ -243,17 +243,20 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   }
 });
   
-router.post('/profile/:id/edit',  (req, res, next) => {
-  let userId =req.session.loggedInUser._id;
-  const {username, email} = req.body
-
+router.post('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
+  if(req.session.loggedInUser){
+    
+    const {username, email} = req.body
+    const userId = req.session.loggedInUser._id;  
     UserModel.findByIdAndUpdate(userId, {username, email})
-    .then(() => {
-        res.redirect(`/profile/${myUserId}`)
+    .then((userId) => {
+      res.create(`profile/{this.user._id}`, {userId, username, email})
     })
+    
     .catch(() => {
         next('Edit failed')
     })
+  }
 });
         
 
