@@ -145,6 +145,19 @@ router.get('/main/programming', checkLoggedIn, (req, res, next) => {
   }
 });
 
+// GET edit profile
+router.get('/profile/:id/edit', (req, res, next) => {
+  let myProfileId = req.params.id
+    UserModel.findById(myProfileId)
+    .then((profile) => {
+
+        res.render('/edit-profile.hbs', {profile})
+    })
+    .catch(() => {
+        next('Cannot find drone')
+    })
+});
+
 // -------------- POST ------------
 
 // POST signUp  
@@ -236,4 +249,17 @@ router.post('/:id/delete', (req, res, next) => {
   .catch((err) => console.log(err));
 });
 
+// POST edit profile
+router.post('/profile/:id/edit', (req, res, next) => {
+  let myProfileId = req.params.id
+  const {username, email, password} = req.body
+  UserModel.findByIdAndUpdate(myProfileId, {username, email, password})
+  .then(() => {
+    res.redirect(`/profile/${user._id}`)
+  })
+  .catch(() => {
+    next('Edit failed')
+  })
+});
+        
  module.exports = router;
