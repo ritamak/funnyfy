@@ -224,7 +224,18 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
       console.log(err);
     })
   }
-})   
+});   
+
+// POST delete favorites
+router.post('/:id/delete', (req, res, next) => {
+  const { id } = req.params;
+  let myUserId = req.session.loggedInUser._id;
+  console.log(myUserId)
+  JokeModel.findByIdAndDelete(id)
+  .then(() => res.redirect(`/profile/${myUserId}`)) 
+  .catch((err) => console.log(err));
+});
+
 router.get('/profile/:id/edit', (req, res, next) => {
   let myProfileId = req.params.id
 
