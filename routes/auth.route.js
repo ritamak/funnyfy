@@ -145,19 +145,6 @@ router.get('/main/programming', checkLoggedIn, (req, res, next) => {
   }
 });
 
-// GET edit profile
-router.get('/profile/:id/edit', (req, res, next) => {
-  let myProfileId = req.params.id
-    UserModel.findById(myProfileId)
-    .then((profile) => {
-
-        res.render('/edit-profile.hbs', {profile})
-    })
-    .catch(() => {
-        next('Cannot find drone')
-    })
-});
-
 // -------------- POST ------------
 
 // POST signUp  
@@ -237,7 +224,40 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
       console.log(err);
     })
   }
-});   
+})   
+
+router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
+  const userId = req.session.loggedInUser._id;
+  UserModel.findById(userId)
+  
+  .then((user) => {
+  
+    res.render('auth/edit-profile.hbs', {user});
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  } else {
+    console.log("Edit Failed");
+  }
+});
+  
+router.post('/profile/:id/edit',  (req, res, next) => {
+  let userId =req.session.loggedInUser._id;
+  const {username, email} = req.body
+
+    UserModel.findByIdAndUpdate(userId, {username, email})
+    .then(() => {
+        res.redirect(`/profile/${myUserId}`)
+    })
+    .catch(() => {
+        next('Edit failed')
+    })
+});
+        
+
+
 
 // POST delete favorites
 router.post('/:id/delete', (req, res, next) => {
@@ -249,17 +269,4 @@ router.post('/:id/delete', (req, res, next) => {
   .catch((err) => console.log(err));
 });
 
-// POST edit profile
-router.post('/profile/:id/edit', (req, res, next) => {
-  let myProfileId = req.params.id
-  const {username, email, password} = req.body
-  UserModel.findByIdAndUpdate(myProfileId, {username, email, password})
-  .then(() => {
-    res.redirect(`/profile/${user._id}`)
-  })
-  .catch(() => {
-    next('Edit failed')
-  })
-});
-        
- module.exports = router;
+module.exports = router;
