@@ -156,7 +156,7 @@ router.post('/signup', (req, res, next) => {
     UserModel.create({username, email, password: hash})
       .then(() => {
         res.redirect('/signin')
-       })
+        })
       .catch((err) => {
         next(err)
       })
@@ -213,6 +213,7 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
   }
 })   
 
+<<<<<<< HEAD
 // POST delete favorites
 router.post('/:id/delete', (req, res, next) => {
   const { id } = req.params
@@ -225,3 +226,8 @@ router.post('/:id/delete', (req, res, next) => {
 })
 
  module.exports = router;
+=======
+        
+
+module.exports = router;
+>>>>>>> c33a2f1655f8ef82c23823ca535eb87d1bd23b89
