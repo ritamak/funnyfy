@@ -203,7 +203,32 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
     })
   }
 })   
+router.get('/profile/:id/edit', (req, res, next) => {
+  let myProfileId = req.params.id
 
+    UserModel.findById(myProfileId)
+    .then((profile) => {
+
+        res.render('/edit-profile.hbs', {profile})
+    })
+    .catch(() => {
+        next('Cannot find drone')
+    })
+});
+
+router.post('/profile/:id/edit', (req, res, next) => {
+  let myProfileId = req.params.id
+
+  const {username, email, password} = req.body
+
+    UserModel.findByIdAndUpdate(myProfileId, {username, email, password})
+    .then(() => {
+        res.redirect(`/profile/${user._id}`)
+    })
+    .catch(() => {
+        next('Edit failed')
+    })
+});
         
 
 module.exports = router;

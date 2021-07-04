@@ -3,7 +3,7 @@ let userModel = require('../models/User.model')
 const mongoose = require('mongoose')
 
 userModel.create([
-  {username: "thisIsAtest", password: "Ar!ar!1123"}
+  {username: "thisIsAtest", password: "Ar!ar!1123", email: "thisemail@gmail.com"}
 ])
   .then(() => {
     console.log('Posts seeded')
