@@ -238,7 +238,6 @@ router.post('/:id/delete', (req, res, next) => {
 
 router.get('/profile/:id/edit', (req, res, next) => {
   let myProfileId = req.params.id
-
     UserModel.findById(myProfileId)
     .then((profile) => {
 
@@ -264,4 +263,4 @@ router.post('/profile/:id/edit', (req, res, next) => {
 });
         
 
- module.exports = router;
+module.exports = router;

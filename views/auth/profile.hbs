@@ -10,11 +10,16 @@
 <p>Email: {{user.email}}</p>
 <br>
 
+
+<br>
+
 <br>
 <!-- FAVORITE JOKES -->
 <h4>Your Favorite Jokes</h4>
 <br>
+{{myUser.favJokes}}
 <br>
+
 {{#each user.favJokes}}
 <h4>{{this.setup}}</h4>
 <p>{{this.punchline}}</p>
@@ -24,4 +29,3 @@
 <button type="submit" onsubmit="return false"><i class="bi bi-x-square" style="font-size:48px"></i></button>
 </form>
 {{/each}}
-<br>
