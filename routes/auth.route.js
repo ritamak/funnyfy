@@ -236,29 +236,31 @@ router.post('/:id/delete', (req, res, next) => {
   .catch((err) => console.log(err));
 });
 
-router.get('/profile/:id/edit', (req, res, next) => {
-  let myProfileId = req.params.id
-    UserModel.findById(myProfileId)
-    .then((profile) => {
-
-        res.render('/edit-profile.hbs', {profile})
-    })
-    .catch(() => {
-        next('Cannot find drone')
-    })
+router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
+  const userId = req.session.loggedInUser._id;
+  UserModel.findById(userId)
+  .then((user) => {
+    res.render('auth/edit-profile.hbs', {user});
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  } else {
+    console.log("Edit Failed");
+  }
 });
 
-router.post('/profile/:id/edit', (req, res, next) => {
-  let myProfileId = req.params.id
-
-  const {username, email, password} = req.body
-
-    UserModel.findByIdAndUpdate(myProfileId, {username, email, password})
+router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
+  const { id } = req.params
+  const {username, email } = req.body
+    UserModel.findByIdAndUpdate(id, {username, email})
     .then(() => {
-        res.redirect(`/profile/${user._id}`)
+      console.log("Edited profile")
+      res.redirect(`/profile/${id}`)  
     })
-    .catch(() => {
-        next('Edit failed')
+    .catch((err) => {
+        console.log('Edit failed')
     })
 });
         
