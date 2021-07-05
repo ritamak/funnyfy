@@ -6,6 +6,22 @@ body {
 
 }
 
+nav {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  padding-bottom: 20px;
+}
+
+#aboutIcon {
+  margin-left: 20px;
+}
+
+#profileIcon {
+  margin-left: 20px;
+}
+
 a {
   color: #43a3e6;
   text-decoration: none;
@@ -111,8 +127,6 @@ ul li {
   margin-left: 20vh;
   margin-right: 20vh;
 }
-
-
 
 .container {
   margin-top: 20px;
