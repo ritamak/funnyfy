@@ -40,10 +40,11 @@ router.get('/logout', (req, res, next) => {
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  const userId = req.session.loggedInUser._id;
-  UserModel.findById(userId)
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findById(myUserId)
   .populate("favJokes")
   .then((user) => {
+
     //let myUser = user.find(user => user._id == userId)
     /*
   console.log(favs)
@@ -53,7 +54,7 @@ router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   });
   console.log(punchlines)
   */
-    res.render('auth/profile.hbs', {user});
+    res.render('auth/profile.hbs', {user, myUserId});
   })
   .catch((err) => {
     console.log(err);
@@ -239,10 +240,10 @@ router.post('/:id/delete', (req, res, next) => {
 // GET profile edit
 router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  const userId = req.session.loggedInUser._id;
-  UserModel.findById(userId)
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findById(myUserId)
   .then((user) => {
-    res.render('auth/edit-profile.hbs', {user});
+    res.render('auth/edit-profile.hbs', {user, myUserId});
   })
   .catch((err) => {
     console.log(err);
@@ -256,6 +257,7 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
 router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
   const { id } = req.params
   const {username, email } = req.body
+  let myUserId = req.session.loggedInUser._id;
     UserModel.findByIdAndUpdate(id, {username, email})
     .then(() => {
       console.log("Edited profile")

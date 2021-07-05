@@ -1,4 +1,3 @@
-<a href="/profile/{{myUserId}}" title="profile"><i class="bi bi-person-square" style="font-size:48px"></i></a>
 <h2>EDIT YOUR PROFILE</h2>
 <div class="container">
   <div class="row">
@@ -6,10 +5,10 @@
 <form method="POST" action="/profile/{{user._id}}">
   <div class="mb-3">
     <label class="form-label" >Username</label>
-    <input class="form-control" type="text" name="name" value="{{user.username}}">
+    <input class="form-control" type="text" name="username" value="{{user.username}}">
     <br>
     <label class="form-label" >Email</label>
-    <input class="form-control" type="text" name="propellers" value="{{user.email}}">
+    <input class="form-control" type="text" name="email" value="{{user.email}}">
     <br>
   <button type="submit">Save the changes</button>
   </div>
