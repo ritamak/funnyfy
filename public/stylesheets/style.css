@@ -1,13 +1,13 @@
 body {
-  background: #ccf0b7;
+  background: #2a2c29;
   padding: 50px;
   font-family: 'Dela Gothic One', cursive;
-  color: rgb(5, 52, 66);
+  color: rgb(196, 183, 11);
 
 }
 
 a {
-  color: #43a3e6;
+  color: rgb(196, 183, 11);
   text-decoration: none;
   font-size: 1.5em;
 }
@@ -115,7 +115,7 @@ ul li {
 
 
 .container {
-  margin-top: 20px;
+  margin-top: 15px;
 }
 
 /* Carousel Styles */
@@ -124,7 +124,7 @@ ul li {
 }
 
 .carousel-inner img {
-  width: 130%;
+  width: 100%;
   height: auto;
 }
 
