@@ -253,12 +253,34 @@ ul li {
 }
 
 #cards{
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:space-evenly;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
 }
+
+.cardGeneral{
+  display: flex;
+  width: 30%;
+  margin: 10px;
+  height: 300px;
+}
+
+.cardProgramming{
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: 10px;
+}
+
+.cardKnock{
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: 10px;
+}
+
 
 .container {
   margin-top: 15px;
