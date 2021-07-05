@@ -200,12 +200,19 @@ ul li {
   justify-content: center;
   margin-right: 20px;
   border-radius: 25px;
+  align-items: center;
+  height: 50vh;
+}
+#profileLeftCol{
+  width: 30%;
 }
 #favJokesWrapper{
   background-color: white;
   border-radius: 25px;
   color: black;
   padding: 10px;
+  width: 70%;
+
 }
 
 /* Main page */
