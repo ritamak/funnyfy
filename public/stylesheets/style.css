@@ -1,5 +1,5 @@
 body {
-  background: #2a2c29;
+  background: #181816;
   padding: 50px;
   font-family: 'Dela Gothic One', cursive;
   color: rgb(196, 183, 11);
@@ -29,7 +29,7 @@ nav {
   align-self: center;
   text-align: center;
   margin-top: 40px;
-  text-shadow: 2px 2px 5px white;
+  
   padding: 40px
 }
 
@@ -40,7 +40,7 @@ nav {
   text-align: center;
   align-self: center;
   margin-top: 40px;
-  text-shadow: 2px 2px 5px white;
+ 
   padding: 40px
 }
 
@@ -50,7 +50,7 @@ nav {
   align-items: center;
   text-align: center;
   align-self: center;
-  text-shadow: 2px 2px 5px white;
+
   font-size: 30px;
   margin-bottom: 30px;
   border: 2px solid black;
@@ -67,7 +67,7 @@ nav {
   text-align: center;
   align-self: center;
   margin-top: 40px;
-  text-shadow: 2px 2px 5px white;
+
   padding: 40px
 }
 
@@ -85,7 +85,7 @@ nav {
     align-items: center;
     text-align: center;
     align-self: center;
-    text-shadow: 2px 2px 5px white;
+  
 }
 
 #randomJokes {
@@ -175,7 +175,7 @@ form button:hover {
 }
 
 ul {
-  border-bottom: 2px solid #8acf81;
+  
   height: 55px;
   padding: 1em 0;
   list-style-type: none;
@@ -190,10 +190,6 @@ ul li {
   float: right;
 }
 
-#to-right span {
-  color: #47ca79;
-  font-size: 1.5em;
-}
 
 #form h2 {
   display: flex;
