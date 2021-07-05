@@ -1,13 +1,14 @@
 <!-- MAIN BUTTON -->
-<a href="/main" title="main"><i class="bi bi-columns-gap" style="font-size:48px"></i></a>
-<a href="/main" title="main"><i class="bi bi-gear" style="font-size:48px"></i></a>
+
 <a href="/profile/{{user._id}}/edit"><button class="btn btn-secondary">Edit profile</button></a>
 <!-- TITLE -->
+<div id="profileText">
 <h1>Hello {{user.username}} Welcome to your private page!</h1>
 <br>
 <!-- PROFILE INFO & EDIT -->
 <p>Username: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
+<a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
 <br>
 <br>
 <br>
@@ -17,11 +18,11 @@
 {{myUser.favJokes}}
 <br>
 {{#each user.favJokes}}
+<div id="favJokes">
 <h4>{{this.setup}}</h4>
 <p>{{this.punchline}}</p>
-<br>
 <!-- DELETE BUTTON -->
-<form action="/{{this._id}}/delete" method="POST">
-<button type="submit" onsubmit="return false"><i class="bi bi-x-square" style="font-size:48px"></i></button>
+<form action="/{{this._id}}/delete" method="POST" style="width: 40px; height:40px">
+<button type="submit" onsubmit="return false" id="deleteFav" style="width: 40px; height:40px"><i class="bi bi-x-square" style="font-size:40px"></i></button>
 </form>
 {{/each}}

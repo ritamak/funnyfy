@@ -1,7 +1,3 @@
-<!-- MAIN BUTTON -->
-<a href="/main" title="main"><i class="bi bi-chevron-left" style="font-size:48px"></i></a>
-<!-- PROFILE BUTTON -->
-<a href="/profile/{{myUserId}}" title="profile"><i class="bi bi-person-square" style="font-size:38px"></i></a>
 <!-- CAROUSEL -->
 <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
@@ -17,7 +13,7 @@
       <div class="carousel-caption d-none d-md-block">
         <p id="firstLine">{{this.setup}}</p>
         <p id="secondLine">{{this.punchline}}</p>
-        <form action="/add-joke" method="POST" class="form-group">
+        <form action="/add-fav" method="POST" class="form-group">
         <div style="display: none">
         <input type="text" name="_id" value={{this._id}}>
         <input type="text" name="id" value={{this.id}}>

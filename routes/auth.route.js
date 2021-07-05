@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model');
 
 // function to private / public
-function checkLoggedIn(req, res, next){
+const checkLoggedIn = (req, res, next) => {
   if ( req.session.loggedInUser) {
       next();
   } else {
@@ -33,17 +33,18 @@ router.get("/signin", (req, res, next) => {
 // GET logOut
 router.get('/logout', (req, res, next) => {
   req.session.destroy();
-    req.app.locals.isLoggedIn = false;
+  req.app.locals.isLoggedIn = false;
   res.redirect('/');
 });
 
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  const userId = req.session.loggedInUser._id;
-  UserModel.findById(userId)
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findById(myUserId)
   .populate("favJokes")
   .then((user) => {
+
     //let myUser = user.find(user => user._id == userId)
     /*
   console.log(favs)
@@ -53,7 +54,7 @@ router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   });
   console.log(punchlines)
   */
-    res.render('auth/profile.hbs', {user});
+    res.render('auth/profile.hbs', {user, myUserId});
   })
   .catch((err) => {
     console.log(err);
@@ -185,7 +186,7 @@ const {email, password} = req.body;
           if(isValid) {
             req.session.loggedInUser = user;
             req.app.locals.isLoggedIn = true;
-            res.redirect(`/profile/${user._id}`)  
+            res.redirect(`/main`)  
         } else {
           res.render('auth/signin', {error: 'Invalid Password'});
         }
@@ -193,8 +194,8 @@ const {email, password} = req.body;
     })
 });
 
-// POST add joke
-router.post("/add-joke", checkLoggedIn, (req, res, next) => {
+// POST add fav
+router.post("/add-fav", checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
     JokeModel.findOne({_id: req.body._id})
     .then((joke) => {
@@ -224,44 +225,7 @@ router.post("/add-joke", checkLoggedIn, (req, res, next) => {
       console.log(err);
     })
   }
-})   
-
-router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
-  const userId = req.session.loggedInUser._id;
-  UserModel.findById(userId)
-  
-  .then((user) => {
-  
-    res.render('auth/edit-profile.hbs', {user});
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  } else {
-    console.log("Edit Failed");
-  }
-});
-  
-router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
-    if(req.session.loggedInUser) {
-  const { id } = req.params
-  const {username, email } = req.body
-  console.log(username, email, id)
-    UserModel.findByIdAndUpdate(id, {username, email})
-    .then(() => {
-      console.log("Edited profile")
-      res.redirect(`/profile/${id}`)  
-    })
-    .catch((err) => {  
-      console.log('Edit failed')
-      next(err)
-    })
-  }
-});
-        
-
-
+});   
 
 // POST delete favorites
 router.post('/:id/delete', (req, res, next) => {
@@ -272,5 +236,37 @@ router.post('/:id/delete', (req, res, next) => {
   .then(() => res.redirect(`/profile/${myUserId}`)) 
   .catch((err) => console.log(err));
 });
+
+// GET profile edit
+router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findById(myUserId)
+  .then((user) => {
+    res.render('auth/edit-profile.hbs', {user, myUserId});
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  } else {
+    console.log("Edit Failed");
+  }
+});
+
+// POST profile edit
+router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
+  const { id } = req.params
+  const {username, email } = req.body
+  let myUserId = req.session.loggedInUser._id;
+    UserModel.findByIdAndUpdate(id, {username, email})
+    .then(() => {
+      console.log("Edited profile")
+      res.redirect(`/profile/${id}`)  
+    })
+    .catch((err) => {
+        console.log('Edit failed', err)
+    })
+  });
+        
 
 module.exports = router;

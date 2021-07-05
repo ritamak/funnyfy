@@ -13,25 +13,31 @@
       <link rel="stylesheet" href="/stylesheets/style.css" />
    </head>
    <body>
-      <nav>
+      <nav  style="text-decoration: none">
          <ul>
-            <li id="to-left">
-            <a href="/" title="home"><i class="bi bi-house" style="font-size:40px"></i></a>
-            </li>
+         <div id="iconsPrivate">
             {{#if isLoggedIn }}
+            <a href="/main" title="main"><i class="bi bi-columns-gap" style="font-size:40px"></i></a>
+            <a href="/profile/{{myUserId}}" title="profile" id="profileIcon"><i class="bi bi-person-square" style="font-size:40px"></i></a>
             <li id="to-right">
                   <a href="/logout">Logout</a> <span> | </span>
             </li>
+            </div>
             {{else}}
+            <div id="iconsHomePage">
+            <li id="to-left">
+            <a href="/" title="home"><i class="bi bi-house" style="font-size:39px"></i></a>
+            </li>
+             <li id="to-left">
+            <a href="/about" title="About" id="aboutIcon"><i class="bi bi-card-heading" style="font-size: 40px"></i></a>
+            </li>
             <li id="to-right">
                <a href="/signup">SignUp</a> <span> | </span>
             </li>
             <li id="to-right">
                <a href="/signin">SignIn</a> <span> | </span>
             </li>
-            <li id="to-right">
-               <a href="/about" title="About"><i class="bi bi-card-heading" style="font: size 38px"></i></a>
-            </li>
+            </div>
             {{/if}}
          </ul>
       </nav>
