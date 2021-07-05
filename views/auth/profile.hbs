@@ -1,26 +1,29 @@
 <!-- TITLE -->
 <div id="profileText">
-<h1>Hello {{user.username}} Welcome to your private page!</h1>
+<h1 id="welcomeProfile">Hello {{user.username}}</h1>
 <br>
 <!-- PROFILE INFO & EDIT -->
 <div id="profileWrapper">
     <div id="editprofileWrapper" style="width: 50%;">
-<p>Username: {{user.username}}</p>
-<p>Email: {{user.email}}</p>
-<a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
-</div>
-<!-- FAVORITE JOKES -->
-<div id="favJokesWrapper">
-<h4>Your Favorite Jokes</h4>
-{{#each user.favJokes}}
-<div id="favJokes">
-<p>{{this.setup}}</p>
-<p>{{this.punchline}}</p>
-<!-- DELETE BUTTON -->
-<form action="/{{this._id}}/delete" method="POST" style="width: 40px; height:40px">
-<button type="submit" onsubmit="return false" id="deleteFav" style="width: 40px; height:40px"><i class="bi bi-x-square" style="font-size:40px"></i></button>
-</form>
-</div>
-{{/each}}
-</div>
+        <div id="profileInfo">      
+        <p>Username: {{user.username}}</p>
+        <p>Email: {{user.email}}</p>
+    </div>
+    <a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
+    </div>
+    <!-- FAVORITE JOKES -->
+    <div id="favJokesWrapper">
+        <br>
+        <h4 style="color: black">Your Favorite Jokes</h4>
+        {{#each user.favJokes}}
+            <div id="favJokes">
+                <p style="font-size: 20px; color:white">{{this.setup}}</p>
+                <p style="font-size: 30px;">{{this.punchline}}</p>
+                <!-- DELETE BUTTON -->
+            </div>
+            <form action="/{{this._id}}/delete" method="POST">
+              <button type="submit" onsubmit="return false"><i class="bi bi-x-square"></i></button>
+            </form>
+            {{/each}}
+    </div>
 </div>
