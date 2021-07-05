@@ -3,20 +3,18 @@
 <h1>Hello {{user.username}} Welcome to your private page!</h1>
 <br>
 <!-- PROFILE INFO & EDIT -->
+<div id="profileWrapper">
+    <div id="editprofileWrapper" style="width: 50%;">
 <p>Username: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
 <a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
-<br>
-<br>
-<br>
+</div>
 <!-- FAVORITE JOKES -->
+<div id="favJokesWrapper">
 <h4>Your Favorite Jokes</h4>
-<br>
-{{myUser.favJokes}}
-<br>
 {{#each user.favJokes}}
 <div id="favJokes">
-<h4>{{this.setup}}</h4>
+<p>{{this.setup}}</p>
 <p>{{this.punchline}}</p>
 <!-- DELETE BUTTON -->
 <form action="/{{this._id}}/delete" method="POST" style="width: 40px; height:40px">
@@ -24,3 +22,5 @@
 </form>
 </div>
 {{/each}}
+</div>
+</div>
