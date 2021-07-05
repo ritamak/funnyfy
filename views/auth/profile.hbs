@@ -1,3 +1,6 @@
+<!-- MAIN BUTTON -->
+
+<a href="/profile/{{user._id}}/edit"><button class="btn btn-secondary">Edit profile</button></a>
 <!-- TITLE -->
 <div id="profileText">
 <h1>Hello {{user.username}} Welcome to your private page!</h1>
@@ -7,8 +10,13 @@
 <p>Email: {{user.email}}</p>
 <a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
 <br>
-</div>
+<br>
+<br>
 <!-- FAVORITE JOKES -->
+<h4>Your Favorite Jokes</h4>
+<br>
+{{myUser.favJokes}}
+<br>
 {{#each user.favJokes}}
 <div id="favJokes">
 <h4>{{this.setup}}</h4>
@@ -17,5 +25,4 @@
 <form action="/{{this._id}}/delete" method="POST" style="width: 40px; height:40px">
 <button type="submit" onsubmit="return false" id="deleteFav" style="width: 40px; height:40px"><i class="bi bi-x-square" style="font-size:40px"></i></button>
 </form>
-</div>
 {{/each}}

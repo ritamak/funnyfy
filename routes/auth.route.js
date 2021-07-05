@@ -266,7 +266,7 @@ router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
     .catch((err) => {
         console.log('Edit failed', err)
     })
-});
+  });
         
 
 module.exports = router;
