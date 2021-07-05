@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model');
 
 // function to private / public
-function checkLoggedIn(req, res, next){
+const checkLoggedIn = (req, res, next) => {
   if ( req.session.loggedInUser) {
       next();
   } else {
@@ -33,7 +33,7 @@ router.get("/signin", (req, res, next) => {
 // GET logOut
 router.get('/logout', (req, res, next) => {
   req.session.destroy();
-    req.app.locals.isLoggedIn = false;
+  req.app.locals.isLoggedIn = false;
   res.redirect('/');
 });
 
@@ -185,7 +185,7 @@ const {email, password} = req.body;
           if(isValid) {
             req.session.loggedInUser = user;
             req.app.locals.isLoggedIn = true;
-            res.redirect(`/profile/${user._id}`)  
+            res.redirect(`/main`)  
         } else {
           res.render('auth/signin', {error: 'Invalid Password'});
         }
@@ -193,8 +193,8 @@ const {email, password} = req.body;
     })
 });
 
-// POST add joke
-router.post("/add-joke", checkLoggedIn, (req, res, next) => {
+// POST add fav
+router.post("/add-fav", checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
     JokeModel.findOne({_id: req.body._id})
     .then((joke) => {
@@ -236,6 +236,7 @@ router.post('/:id/delete', (req, res, next) => {
   .catch((err) => console.log(err));
 });
 
+// GET profile edit
 router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
   const userId = req.session.loggedInUser._id;
@@ -251,6 +252,7 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   }
 });
 
+// POST profile edit
 router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
   const { id } = req.params
   const {username, email } = req.body
@@ -260,7 +262,7 @@ router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
       res.redirect(`/profile/${id}`)  
     })
     .catch((err) => {
-        console.log('Edit failed')
+        console.log('Edit failed', err)
     })
 });
         

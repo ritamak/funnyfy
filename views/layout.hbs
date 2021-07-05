@@ -15,14 +15,18 @@
    <body>
       <nav>
          <ul>
-            <li id="to-left">
-            <a href="/" title="home"><i class="bi bi-house" style="font-size:40px"></i></a>
-            </li>
+
             {{#if isLoggedIn }}
+            <a href="/main" title="main"><i class="bi bi-columns-gap" style="font-size:48px"></i></a>
+            <a href="/profile/{{myUserId}}" title="profile"><i class="bi bi-person-square" style="font-size:48px"></i></a>
+
             <li id="to-right">
                   <a href="/logout">Logout</a> <span> | </span>
             </li>
             {{else}}
+            <li id="to-left">
+               <a href="/" title="home"><i class="bi bi-house" style="font-size:40px"></i></a>
+            </li>
             <li id="to-right">
                <a href="/signup">SignUp</a> <span> | </span>
             </li>
