@@ -1,5 +1,5 @@
 body {
-  background: #2a2c29;
+  background: #181816;
   padding: 50px;
   font-family: 'Dela Gothic One', cursive;
   color: rgb(196, 183, 11);
@@ -29,7 +29,7 @@ nav {
   align-self: center;
   text-align: center;
   margin-top: 40px;
-  text-shadow: 2px 2px 5px white;
+  
   padding: 40px
 }
 
@@ -40,15 +40,17 @@ nav {
   text-align: center;
   align-self: center;
   margin-top: 40px;
-  text-shadow: 2px 2px 5px white;
+ 
   padding: 40px
 }
 
 #favJokes{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  text-shadow: 2px 2px 5px white;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+
   font-size: 30px;
   margin-bottom: 30px;
   border: 2px solid black;
@@ -63,8 +65,9 @@ nav {
   align-items: center;
   text-align: center;
   align-self: center;
-  margin-bottom: 40px;
-  text-shadow: 2px 2px 5px white;
+  margin-top: 40px;
+
+  padding: 40px
 }
 
 #deleteFav {
@@ -86,7 +89,7 @@ nav {
 }
 
 #editprofileWrapper{
-  background-color: yellow;
+  background-color: rgb(199, 206, 107);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -94,7 +97,7 @@ nav {
 }
 
 #favJokesWrapper{
-  background-color: white;
+  background-color: rgb(228, 225, 183);
 }
 
 #jokeText{
@@ -103,7 +106,7 @@ nav {
     align-items: center;
     text-align: center;
     align-self: center;
-    text-shadow: 2px 2px 5px white;
+  
 }
 
 #randomJokes {
@@ -215,7 +218,7 @@ form button:hover {
 }
 
 ul {
-  border-bottom: 2px solid #8acf81;
+  
   height: 55px;
   padding: 1em 0;
   list-style-type: none;
@@ -230,10 +233,6 @@ ul li {
   float: right;
 }
 
-#to-right span {
-  color: #47ca79;
-  font-size: 1.5em;
-}
 
 #form h2 {
   display: flex;

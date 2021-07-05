@@ -268,5 +268,6 @@ router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
     })
   });
         
+  
 
 module.exports = router;
