@@ -1,5 +1,5 @@
 body {
-  background: #181816;
+  background: #212222;
   padding: 50px;
   font-family: 'Dela Gothic One', cursive;
   color: rgb(196, 183, 11);
@@ -16,14 +16,16 @@ nav {
 
 
 #aboutIcon {
-  margin-left: 20px;
+  margin-left: 850px;
 }
 
 #profileIcon {
-  margin-left: 20px;
+  
+  margin-left: 950px;
 }
 
 #welcomeText {
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -55,12 +57,13 @@ nav {
   font-size: 30px;
   margin-bottom: 30px;
   border: 2px solid black;
-  background-color: yellow;
+  background-color: rgb(61, 61, 55);
   margin-left: 50px;
   margin-right: 50px;
 }
 
 #profileText{
+  color: rgb(253, 252, 250);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -167,8 +170,8 @@ form button {
 }
 
 form button {
-  background:  #43a3e6;
-  border: 1px solid  #43a3e6;
+  background:  #d8c430;
+  border: 1px solid  #7c7b71;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
@@ -183,7 +186,7 @@ form button {
 
 form button:hover {
   background: #fff;
-  color: #43a3e6;
+  color: #0069b4;
   transition: 0.3s ease background;
 }
 
@@ -243,6 +246,7 @@ ul li {
 }
 
 /* Carousel Styles */
+.carousel slide
 .carousel-indicators .active {
   background-color: #2980b9;
 }
