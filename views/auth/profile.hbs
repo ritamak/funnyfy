@@ -1,7 +1,7 @@
 <!-- MAIN BUTTON -->
 <a href="/main" title="main"><i class="bi bi-columns-gap" style="font-size:48px"></i></a>
 <a href="/main" title="main"><i class="bi bi-gear" style="font-size:48px"></i></a>
- <a href="/profile/{{user._id}}/edit"><button class="btn btn-secondary">Edit Your Profile</button></a>
+<a href="/profile/{{user._id}}/edit"><button class="btn btn-secondary">Edit profile</button></a>
 <!-- TITLE -->
 <h1>Hello {{user.username}} Welcome to your private page!</h1>
 <br>
@@ -9,17 +9,13 @@
 <p>Username: {{user.username}}</p>
 <p>Email: {{user.email}}</p>
 <br>
-
-
 <br>
-
 <br>
 <!-- FAVORITE JOKES -->
 <h4>Your Favorite Jokes</h4>
 <br>
 {{myUser.favJokes}}
 <br>
-
 {{#each user.favJokes}}
 <h4>{{this.setup}}</h4>
 <p>{{this.punchline}}</p>

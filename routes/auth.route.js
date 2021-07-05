@@ -243,18 +243,19 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   }
 });
   
-router.post('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
-  if(req.session.loggedInUser){
-    
-    const {username, email} = req.body
-    const userId = req.session.loggedInUser._id;  
-    UserModel.findByIdAndUpdate(userId, {username, email})
-    .then((userId) => {
-      res.create(`profile/{this.user._id}`, {userId, username, email})
+router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
+    if(req.session.loggedInUser) {
+  const { id } = req.params
+  const {username, email } = req.body
+  console.log(username, email, id)
+    UserModel.findByIdAndUpdate(id, {username, email})
+    .then(() => {
+      console.log("Edited profile")
+      res.redirect(`/profile/${id}`)  
     })
-    
-    .catch(() => {
-        next('Edit failed')
+    .catch((err) => {  
+      console.log('Edit failed')
+      next(err)
     })
   }
 });

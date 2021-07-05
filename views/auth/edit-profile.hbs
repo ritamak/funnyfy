@@ -1,19 +1,15 @@
 <h2>EDIT YOUR PROFILE</h2>
-
 <div class="container">
   <div class="row">
-    <div class="col">
-    
-<form method="POST" action="/profile/{{this.user._id}}">
-
+    <div class="col">   
+<form method="POST" action="/profile/{{user._id}}">
   <div class="mb-3">
     <label class="form-label" >Username</label>
-    <input class="form-control" type="text" name="name" value="{{user.username}}">
+    <input class="form-control" type="text" name="username" value="{{user.username}}">
     <br>
     <label class="form-label" >Email</label>
-    <input class="form-control" type="text" name="propellers" value="{{user.email}}">
+    <input class="form-control" type="text" name="email" value="{{user.email}}">
     <br>
-    <button class="btn btn-primary" type="submit" href="/profile/{{this.user._id}}" >DONE</button>
+  <button type="submit">Save the changes</button>
   </div>
-  
 </form>
