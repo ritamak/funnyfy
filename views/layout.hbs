@@ -11,9 +11,22 @@
       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
       <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
       <link rel="stylesheet" href="/stylesheets/style.css" />
+      <meta property="og:url"           content="http://www.your-domain.com/your-page.html" />
+      <meta property="og:type"          content="website" />
+      <meta property="og:title"         content="Your Website Title" />
+      <meta property="og:description"   content="Your description" />
+      <meta property="og:image"         content="http://www.your-domain.com/path/image.jpg" />
    </head>
    <body>
-      <div id="fb-root"></div>
+       <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+    <div class="fb-quote"></div>
       <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pt_PT/sdk.js#xfbml=1&version=v11.0" nonce="yEN1QcbL"></script>
       <nav  style="text-decoration: none">
          <ul>
