@@ -40,27 +40,17 @@ router.get('/logout', (req, res, next) => {
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
-  let myUserId = req.session.loggedInUser._id;
-  UserModel.findById(myUserId)
-  .populate("favJokes")
-  .then((user) => {
-
-    //let myUser = user.find(user => user._id == userId)
-    /*
-  console.log(favs)
-  let punchlines = user.favJokes.map((joke) => {
-     let jokestoprint = [`${joke.setup}, ${joke.punchline}`]
-    return jokestoprint
-  });
-  console.log(punchlines)
-  */
+    let myUserId = req.session.loggedInUser._id;
+    UserModel.findById(myUserId)
+    .populate("favJokes")
+    .then((user) => {
     res.render('auth/profile.hbs', {user, myUserId});
   })
-  .catch((err) => {
-    console.log(err);
+    .catch((err) => {
+    next(err);
   })
   } else {
-    console.log("you don't have acess");
+    next("you don't have acess");
   }
 });
 
@@ -72,7 +62,7 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
       let general = jokes.filter(joke => joke.type.includes("general"));
       let programming = jokes.filter(joke => joke.type.includes("programming"));
       let knock = jokes.filter(joke => joke.type.includes("knock-knock"));
-      let myUserId = req.session.loggedInUser._id
+      let myUserId = req.session.loggedInUser._id;
       const randomJoke = () => {
         return jokes[Math.floor(Math.random() * jokes.length)];
       };
@@ -88,10 +78,10 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
       res.render('auth/main.hbs', {general, programming, knock, jokes, myUserId, randomJoke, jokeProgramming, jokeGeneral, jokeKnock})
     })
     .catch((err) => {
-      console.log(err);
+      next(err);
     })
   } else {
-    console.log("you dont have acess");
+    next("you dont have acess");
   }
 });
 
@@ -105,10 +95,10 @@ router.get('/main/general', checkLoggedIn, (req, res, next) => {
     res.render('auth/general.hbs', {general, jokes, myUserId});
   })
   .catch((err) => {
-    console.log(err);
+    next(err);
   })
   } else {
-    console.log("you don't have acess");
+    next("you don't have acess");
   }
 });
 
@@ -122,10 +112,10 @@ router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
     res.render('auth/knock-knock.hbs', {knock, jokes, myUserId})
   })
   .catch((err) => {
-    console.log(err)
+    next(err)
   })
   } else {
-  console.log("you dont have acess");
+  next("you dont have acess");
   }
 });
 
@@ -142,7 +132,23 @@ router.get('/main/programming', checkLoggedIn, (req, res, next) => {
     console.log(err);
   })
   } else {
-    console.log("you don't have acess");
+    next("you don't have acess");
+  }
+});
+
+// GET profile edit
+router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
+  if (req.session.loggedInUser) {
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findById(myUserId)
+  .then((user) => {
+    res.render('auth/edit-profile.hbs', {user, myUserId});
+  })
+  .catch((err) => {
+    next(err);
+  })
+  } else {
+    console.log("Edit Failed");
   }
 });
 
@@ -192,6 +198,9 @@ const {email, password} = req.body;
         }
       }    
     })
+    .catch((er) => {
+      next(err)
+    })
 });
 
 // POST add fav
@@ -222,7 +231,7 @@ router.post("/add-fav", checkLoggedIn, (req, res, next) => {
       }
     })
     .catch((err) => {
-      console.log(err);
+      next(err);
     })
   }
 });   
@@ -237,22 +246,6 @@ router.post('/:id/delete', (req, res, next) => {
   .catch((err) => console.log(err));
 });
 
-// GET profile edit
-router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
-  let myUserId = req.session.loggedInUser._id;
-  UserModel.findById(myUserId)
-  .then((user) => {
-    res.render('auth/edit-profile.hbs', {user, myUserId});
-  })
-  .catch((err) => {
-    console.log(err);
-  })
-  } else {
-    console.log("Edit Failed");
-  }
-});
-
 // POST profile edit
 router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
   const { id } = req.params
@@ -264,10 +257,8 @@ router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
       res.redirect(`/profile/${id}`)  
     })
     .catch((err) => {
-        console.log('Edit failed', err)
+        next('Edit failed', err)
     })
   });
         
-  
-
 module.exports = router;

@@ -5,25 +5,26 @@
 <!-- PROFILE INFO & EDIT -->
 <div id="profileWrapper">
     <div id="editprofileWrapper" style="width: 50%;">
-        <div id="profileInfo">      
-        <p>Username: {{user.username}}</p>
-        <p>Email: {{user.email}}</p>
-    </div>
-    <a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
+        <div id="profileInfo">
+            <p>Username: {{user.username}}</p>
+            <p>Email: {{user.email}}</p>
+        </div>
+        <a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
     </div>
     <!-- FAVORITE JOKES -->
     <div id="favJokesWrapper">
         <br>
         <h4 style="color: black">Your Favorite Jokes</h4>
         {{#each user.favJokes}}
-            <div id="favJokes">
-                <p style="font-size: 20px; color:white">{{this.setup}}</p>
-                <p style="font-size: 30px;">{{this.punchline}}</p>
-                <!-- DELETE BUTTON -->
-            </div>
-            <form action="/{{this._id}}/delete" method="POST">
-              <button type="submit" onsubmit="return false"><i class="bi bi-x-square"></i></button>
-            </form>
-            {{/each}}
+        <div id="favJokes">
+            <p style="font-size: 20px; color:white">{{this.setup}}</p>
+            <p style="font-size: 30px;">{{this.punchline}}</p>
+            <!-- DELETE BUTTON -->
+        </div>
+        <form action="/{{this._id}}/delete" method="POST">
+        <button type="submit" onsubmit="return false"><i class="bi bi-x-square"></i></button>
+        </form>
+        <div class="fb-share-button" data-href="https://github.com/ritamak/funnyfy" data-layout="button" data-size="small"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fgithub.com%2Fritamak%2Ffunnyfy&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Partilhar</a></div>
+        {{/each}}
     </div>
 </div>
