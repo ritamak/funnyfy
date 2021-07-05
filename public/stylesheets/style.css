@@ -329,3 +329,11 @@ padding: 15px;
   background-color: black;
   border-color: black;
 }
+
+#carouselWrapper{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+}
