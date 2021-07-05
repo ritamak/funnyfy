@@ -4,20 +4,20 @@
 <br>
 <!-- GET RANDOM JOKE -->
 <div id="randomJokes">
-  <div id="programming">
+  <div id="general">
+  {{#each jokeGeneral}}
+  {{this.setup}}
+  {{this.punchline}}
+  {{/each}}
+  </div>
+    <div id="programming">
   {{#each jokeProgramming}}
   {{this.setup}}
   {{this.punchline}}
   {{/each}}
   </div>
-  <div id="knock">
+    <div id="knock">
   {{#each jokeKnock}}
-  {{this.setup}}
-  {{this.punchline}}
-  {{/each}}
-  </div>
-  <div id="general">
-  {{#each jokeGeneral}}
   {{this.setup}}
   {{this.punchline}}
   {{/each}}
