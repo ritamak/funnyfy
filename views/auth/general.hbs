@@ -1,16 +1,17 @@
 <!-- CAROUSEL -->
+<p id="facebookShare" style="font-size: 20px; color:red">Underline the joke you like and click in the share with your friends!</p>
 <div id="carouselWrapper">
-<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="width: 60vw; height: 60vh">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <p id="secondLine">all the jokes</p>
+  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="width: 60vw; height: 60vh">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="https://media.istockphoto.com/vectors/yellow-halftone-spotted-background-vector-id945172204?k=6&m=945172204&s=612x612&w=0&h=bP4XReoPy2UHtFXhwslYALrY4P0wNpWUas4tc_3zhaU=" class="d-block w-100" alt="...">
+        <div class="carousel-caption d-none d-md-block">
+          <p id="secondLine">all the jokes</p>
       </div>
     </div>
     {{#each general}}
     <div class="carousel-item">
-      <img src="https://i.pinimg.com/originals/8f/64/ad/8f64ad76980a7e3b35d084a6d67c96c5.jpg" alt="...">
+      <img src="https://media.istockphoto.com/vectors/yellow-halftone-spotted-background-vector-id945172204?k=6&m=945172204&s=612x612&w=0&h=bP4XReoPy2UHtFXhwslYALrY4P0wNpWUas4tc_3zhaU=" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <p id="firstLine">{{this.setup}}</p>
         <p id="secondLine">{{this.punchline}}</p>
@@ -26,14 +27,15 @@
         </form>
       </div>
     </div>
-  {{/each}}
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
+    {{/each}}
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
 </div>
-</div>
+<p style="font-size: 10px; color:red">Underline the joke you like and click in the share with your friends!</p>

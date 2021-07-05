@@ -16,16 +16,14 @@ nav {
 
 
 #aboutIcon {
-  margin-left: 850px;
+  margin-left: 20px;
 }
 
 #profileIcon {
-  
-  margin-left: 950px;
+  margin-left: 20px;
 }
 
 #welcomeText {
-  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -57,13 +55,12 @@ nav {
   font-size: 30px;
   margin-bottom: 30px;
   border: 2px solid black;
-  background-color: rgb(61, 61, 55);
+  background-color: yellow;
   margin-left: 50px;
   margin-right: 50px;
 }
 
 #profileText{
-  color: rgb(253, 252, 250);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -170,8 +167,8 @@ form button {
 }
 
 form button {
-  background:  #d8c430;
-  border: 1px solid  #7c7b71;
+  background:  #43a3e6;
+  border: 1px solid  #43a3e6;
   border-radius: 4px;
   color: #fff;
   cursor: pointer;
@@ -186,7 +183,7 @@ form button {
 
 form button:hover {
   background: #fff;
-  color: #0069b4;
+  color: #43a3e6;
   transition: 0.3s ease background;
 }
 
@@ -246,7 +243,6 @@ ul li {
 }
 
 /* Carousel Styles */
-.carousel slide
 .carousel-indicators .active {
   background-color: #2980b9;
 }

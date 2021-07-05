@@ -1,6 +1,5 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const jokeSchema = new Schema({
   id: {
     type: Number,
@@ -18,8 +17,7 @@ const jokeSchema = new Schema({
     type: String,
     require: true,
   },
-
 });
-const Joke = model("Joke", jokeSchema);
 
+const Joke = model("Joke", jokeSchema);
 module.exports = Joke;
