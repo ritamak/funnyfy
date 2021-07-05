@@ -110,27 +110,49 @@ nav {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  padding: 30px;
 }
 
 #general{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   margin: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 30px;
+  width: 30%;
+  height: 300px;
+
 }
 
 #programming{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   margin: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 30px;
+  width: 30%;
+  height: 300px;
+
 }
 #knock{
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   margin: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 30px;
+  width: 30%;
+  height: 300px;
+
 }
 
 a {
@@ -231,12 +253,34 @@ ul li {
 }
 
 #cards{
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:space-evenly;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
 }
+
+.cardGeneral{
+  display: flex;
+  width: 30%;
+  margin: 10px;
+  height: 300px;
+}
+
+.cardProgramming{
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: 10px;
+}
+
+.cardKnock{
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: 10px;
+}
+
 
 .container {
   margin-top: 15px;
