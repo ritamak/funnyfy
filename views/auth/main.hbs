@@ -7,19 +7,19 @@
   <div id="programming">
     {{#each jokeProgramming}}
     {{this.setup}}
-    {{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}
+    {{this.punchline}}
     {{/each}}
   </div>
   <div id="knock">
     {{#each jokeKnock}}
     {{this.setup}}
-    {{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}
+    {{this.punchline}}
     {{/each}}
   </div>
   <div id="general">
     {{#each jokeGeneral}}
     {{this.setup}}
-    {{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}
+    {{this.punchline}}
     {{/each}}
   </div>
 </div>
@@ -56,7 +56,7 @@
 </div>
 <br>
 <br>
- <h1>Gif Gallerie</h1>
+ <h1>Gif Gallery</h1>
     <br>
     <span class="container">
  <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" style="width: 40vw; height: 40vh">
