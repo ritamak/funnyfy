@@ -301,20 +301,20 @@ ul li {
   display: flex;
   width: 30%;
   margin: 10px;
-  height: 300px;
+  height: 350px;
   border-radius: 25px;
 }
 .cardProgramming{
   display: flex;
   width: 30%;
-  height: 300px;
+  height: 350px;
   margin: 10px;
   border-radius: 25px;
 }
 .cardKnock{
   display: flex;
   width: 30%;
-  height: 300px;
+  height: 350px;
   margin: 10px;
   border-radius: 25px;
 }
