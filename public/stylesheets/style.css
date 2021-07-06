@@ -1,6 +1,6 @@
 /* General */
 body {
-  background: #181816;
+  background: #212222;
   padding: 50px;
   font-family: 'Dela Gothic One', cursive;
   color: white;
@@ -16,11 +16,12 @@ nav {
 
 
 #aboutIcon {
-  margin-left: 20px;
+  margin-left: 850px;
 }
 
 #profileIcon {
-  margin-left: 20px;
+  
+  margin-left: 950px;
 }
 
 a {
@@ -117,6 +118,7 @@ ul li {
 
 /* Landing page */
 #welcomeText {
+  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -162,6 +164,7 @@ ul li {
   padding: 10px;
 }
 #profileText{
+  color: rgb(253, 252, 250);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -304,6 +307,7 @@ ul li {
   margin-top: 15px;
 }
 /* Carousel Styles */
+.carousel slide
 .carousel-indicators .active {
   background-color: #2980b9;
 }
