@@ -137,13 +137,7 @@ ul li {
   padding: 10px
 }
 #aboutBox{
-<<<<<<< HEAD
-  background-color: white;
-  width: 97vw;
-  height: 80vh;
-=======
   background-color: rgb(238, 238, 121);
->>>>>>> 9188be625cf4737638e7eaf1b3ca0b5b1dd2bbef
   display: flex;
   flex-direction: column;
   justify-self: center;

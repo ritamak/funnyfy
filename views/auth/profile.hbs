@@ -25,7 +25,7 @@
         {{#each user.favJokes}}
         <div id="favJokes">
             <p style="font-size: 20px; color:white">{{this.setup}}</p>
-            <p style="font-size: 30px;">{{this.punchline}}</p>
+            <p style="font-size: 30px;">{{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}</p>
             <!-- DELETE BUTTON -->
         </div>
         <form action="/{{this._id}}/delete" method="POST">

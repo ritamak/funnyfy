@@ -7,19 +7,19 @@
   <div id="programming">
     {{#each jokeProgramming}}
     {{this.setup}}
-    {{this.punchline}}
+    {{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}
     {{/each}}
   </div>
   <div id="knock">
     {{#each jokeKnock}}
     {{this.setup}}
-    {{this.punchline}}
+    {{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}
     {{/each}}
   </div>
   <div id="general">
     {{#each jokeGeneral}}
     {{this.setup}}
-    {{this.punchline}}
+    {{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}
     {{/each}}
   </div>
 </div>
