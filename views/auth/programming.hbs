@@ -16,7 +16,7 @@
       <img src="https://media.istockphoto.com/vectors/yellow-halftone-spotted-background-vector-id945172204?k=6&m=945172204&s=612x612&w=0&h=bP4XReoPy2UHtFXhwslYALrY4P0wNpWUas4tc_3zhaU=" alt="...">
       <div class="carousel-caption d-none d-md-block">
         <p id="firstLine">{{this.setup}}</p>
-        <p id="secondLine">{{this.punchline}}</p>
+        <p id="secondLine">{{#addEmoji this.punchline}}{{this.punchline}}{{/addEmoji}}</p>
         <form action="/add-fav" method="POST" class="form-group">
         <div style="display: none">
         <input type="text" name="_id" value={{this._id}}>

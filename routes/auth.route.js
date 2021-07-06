@@ -3,6 +3,18 @@ const router = require("express").Router();
 const UserModel = require('../models/User.model');
 const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model');
+const Handlebars = require("hbs");
+
+Handlebars.registerHelper('addEx', function (string) {
+  return string.charAt(string.length - 1) === "!" ? string : string+"!"
+})
+
+Handlebars.registerHelper('addEmoji', function (string) {
+  const emojiArray = ["&#129299","&#128584","&#128585","&#128586", "&#128585", "&#128580", "&#128512", "&#128513", "&#128514", "&#128515", "&#128516", "&#128517", "&#128518", "&#128518", "&#12852", "&#128518","&#128518", "&#128518"]
+  const randomEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)]
+  console.log(string)
+  return string + " " + randomEmoji
+})
 
 // function to private / public
 const checkLoggedIn = (req, res, next) => {
@@ -92,7 +104,7 @@ router.get('/main/general', checkLoggedIn, (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
     let general = jokes.filter(joke => joke.type.includes("general"));
-    res.render('auth/general.hbs', {general, jokes, myUserId});
+    res.render('auth/general.hbs', {general, jokes, myUserId, addEx});
   })
   .catch((err) => {
     next(err);
@@ -109,6 +121,7 @@ router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
   JokeModel.find()
   .then((jokes) => {
     let knock = jokes.filter(joke => joke.type.includes("knock-knock"));
+    console.log(knock)
     res.render('auth/knock-knock.hbs', {knock, jokes, myUserId})
   })
   .catch((err) => {
