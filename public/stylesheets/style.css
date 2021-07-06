@@ -1,9 +1,9 @@
+/* General */
 body {
   background: #212222;
   padding: 50px;
   font-family: 'Dela Gothic One', cursive;
-  color: rgb(196, 183, 11);
-
+  color: white;
 }
 
 nav {
@@ -11,139 +11,27 @@ nav {
   flex-direction: column;
   justify-content: center;
   justify-items: center;
-  padding-bottom: 20px;
+  padding-bottom: 10px;
 }
 
 
 #aboutIcon {
-  margin-left: 20px;
+  margin-left: 950px;
 }
 
 #profileIcon {
-  margin-left: 20px;
-}
-
-#welcomeText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  align-self: center;
-  text-align: center;
-  margin-top: 40px;
   
-  padding: 40px
-}
-
-#aboutText {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  align-self: center;
-  margin-top: 40px;
- 
-  padding: 40px
-}
-
-#favJokes{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  align-self: center;
-
-  font-size: 30px;
-  margin-bottom: 30px;
-  border: 2px solid black;
-  background-color: yellow;
-  margin-left: 50px;
-  margin-right: 50px;
-}
-
-#profileText{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  align-self: center;
-  margin-top: 40px;
-
-  padding: 40px
-}
-
-#deleteFav {
-  background-color: green;
-}
-
-.bi{
-  margin-top: 0px;
-}
-
-#profileWrapper{
-  display: flex;
-  flex-direction: row;
-  align-self: center;
-  align-content: center;
-  justify-content: space-evenly;
-  margin-left: 30px;
-  margin-right: 30px;
-}
-
-#editprofileWrapper{
-  background-color: rgb(199, 206, 107);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: 20px;
-}
-
-#favJokesWrapper{
-  background-color: rgb(228, 225, 183);
-}
-
-#jokeText{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    align-self: center;
-  
-}
-
-#randomJokes {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-}
-
-#general{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 10px;
-}
-
-#programming{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 10px;
-}
-#knock{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 10px;
+  margin-left: 950px;
 }
 
 a {
-  color: rgb(196, 183, 11);
+  color: rgb(153, 153, 150);
   text-decoration: none;
   font-size: 1.5em;
 }
 
 form {
+  
   margin: 30px auto;
   width: 380px;
 }
@@ -167,10 +55,10 @@ form button {
 }
 
 form button {
-  background:  #43a3e6;
-  border: 1px solid  #43a3e6;
-  border-radius: 4px;
-  color: #fff;
+  background:  rgb(236, 236, 46);
+  border: 1px solid  rgb(83, 83, 66);
+  border-radius: 25px;
+  color: rgb(32, 30, 30);
   cursor: pointer;
   display: inline-block;
   font-size: 14px;
@@ -183,21 +71,20 @@ form button {
 
 form button:hover {
   background: #fff;
-  color: #43a3e6;
+  color: black;
   transition: 0.3s ease background;
 }
 
 .error {
-  background: #be30598c;
+  background: red;
   box-sizing: border-box;
-  color: #fff;
+  color: black;
   margin: 20px auto;
   padding: 20px;
   width: 100%;
 }
 
-ul {
-  
+ul { 
   height: 55px;
   padding: 1em 0;
   list-style-type: none;
@@ -220,42 +107,212 @@ ul li {
 
 #to-left {
   float: left;
-  color: #43a3e6;
+  color: yellow;
   
 }
 
 #to-left p a {
-  color: #43a3e6;
+  color: yellow;
   font-weight: bold;
   font-size: 2em;
 }
 
-#cards{
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content:space-evenly;
+/* Landing page */
+#welcomeText {
+  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  text-align: center;
+  margin-top: 40px;  
+  padding: 40px
+}
+/* About page */
+#aboutText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  padding: 40px
+}
+#aboutBox{
+  background-color: rgb(238, 238, 121);
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  color: black;
+  border-radius: 25px;
+  padding: 20px;
 }
 
+/* Profile page */
+#favJokes{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  font-size: 30px;
+  margin-bottom: 30px;
+  background-color: black;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 25px;
+  color: yellow;
+  padding: 10px;
+}
+
+#profileText{
+  color: rgb(253, 252, 250);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  align-self: center;
+  padding: 40px
+}
+#profileInfo{
+  background-color: white;
+  color: black;
+  width: 80%;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  justify-self: center;
+  padding: 10px;
+}
+#deleteFav {
+  background-color: green;
+}
+#profileWrapper{
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-content: center;
+  justify-content: space-evenly;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+#editprofileWrapper{
+  background-color: yellow;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 20px;
+  border-radius: 25px;
+}
+#favJokesWrapper{
+  background-color: white;
+  border-radius: 25px;
+  color: black;
+  padding: 10px;
+}
+
+/* Main page */
+#welcomeProfle {
+  color: white;
+}
+#jokeText{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    align-self: center;
+}
+#randomJokes {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+#general{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 30px;
+  width: 30%;
+  height: 300px;
+  border-radius: 25px;
+}
+#programming{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 30px;
+  width: 30%;
+  height: 300px;
+  border-radius: 25px;
+}
+#knock{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+  background-color: yellow;
+  color: black;
+  font-size: 30px;
+  width: 30%;
+  height: 300px;
+  border-radius: 25px;
+}
+#cards{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 30px;
+}
+.cardGeneral{
+  display: flex;
+  width: 30%;
+  margin: 10px;
+  height: 300px;
+  border-radius: 25px;
+}
+.cardProgramming{
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: 10px;
+  border-radius: 25px;
+}
+.cardKnock{
+  display: flex;
+  width: 30%;
+  height: 300px;
+  margin: 10px;
+  border-radius: 25px;
+}
 .container {
   margin-top: 15px;
 }
-
 /* Carousel Styles */
+.carousel slide
 .carousel-indicators .active {
   background-color: #2980b9;
 }
-
 .carousel-inner img {
   width: 100%;
   height: auto;
 }
-
 .carousel-control {
   width: 0;
 }
-
 .carousel-control.left,
 .carousel-control.right {
 opacity: 1;
@@ -264,15 +321,12 @@ background-image: none;
 background-repeat: no-repeat;
 text-shadow: none;
 }
-
 .carousel-control.left span {
 padding: 15px;
 }
-
 .carousel-control.right span {
 padding: 15px;
 }
-
 .carousel-control .glyphicon-chevron-left, 
 .carousel-control .glyphicon-chevron-right, 
 .carousel-control .icon-prev, 
@@ -282,47 +336,43 @@ top: 45%;
 z-index: 5;
 display: inline-block;
 }
-
 .carousel-control .glyphicon-chevron-left,
 .carousel-control .icon-prev {
 left: 0;
 }
-
 .carousel-control .glyphicon-chevron-right,
 .carousel-control .icon-next {
 right: 0;
 }
-
 .carousel-control.left span,
 .carousel-control.right span {
 background-color: #000;
 }
-
 .carousel-control.left span:hover,
 .carousel-control.right span:hover {
 opacity: .7;
 filter: alpha(opacity=70);
 }
-
 /* Carousel Header Styles */
-
 #firstLine {
   color: black;
   margin-top: 20px;
   font-size: 30px;
   margin-bottom: 20px;
 }
-
 #secondLine {
   background-color: black;
   font-size: 40px;
   margin-bottom: 10px;
 }
-
 #carouselWrapper{
   display: flex;
   flex-direction: row;
   align-self: center;
   align-content: center;
   justify-content: center;
+}
+
+#facebookShare{
+  text-align: center;
 }
