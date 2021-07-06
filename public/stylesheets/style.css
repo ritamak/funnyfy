@@ -234,6 +234,22 @@ ul li {
 #welcomeProfle {
   color: white;
 }
+#e-decoration {
+  width: 75%;
+  height: 75%;
+  image-resolution: 250px auto;
+}
+#main-img{
+  width: 25%;
+  height: 25%;
+  image-resolution: 250px auto;
+}
+#main-image {
+  width: 20%;
+  height: 105%;
+  image-resolution: 250px auto;
+}
+
 #jokeText{
     display: flex;
     flex-direction: column;
