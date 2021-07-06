@@ -13,9 +13,7 @@ Handlebars.registerHelper('addEx', function (string) {
 
 // for adding random emoji
 Handlebars.registerHelper('addEmoji', function (string) {
-  const emojiArray = ["&#129299","&#128584","&#128585","&#128586", "&#128585", "&#128580", "&#128512",
-   "&#128513", "&#128514", "&#128515", "&#128516", "&#128517", "&#128518", "&#128522", "&#12852", 
-   "&#128518","&#128518", "&#128518"]
+  const emojiArray = ["&#129325", "&#129322", "&#128579", "&#128569", "&#128541", "&#128540", "&#128539", "&#128527", "&#128518", "&#128517", "&#128516", "&#128515", "&#128514"," &#128513", "&#128512", "&#128584", "&#128585", "&#128586"] 
   const randomEmoji = emojiArray[Math.floor(Math.random() * emojiArray.length)]
   return result = string + " " + randomEmoji
 });
