@@ -124,8 +124,9 @@ ul li {
   align-items: center;
   align-self: center;
   text-align: center;
-  margin-top: 40px;  
-  padding: 40px
+  margin-top: -40px;  
+  padding: 40px;
+ 
 }
 /* About page */
 #aboutText {
