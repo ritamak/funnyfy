@@ -141,15 +141,18 @@ ul li {
   align-items: center;
   text-align: center;
   align-self: center;
-  padding: 10px
+  padding: 20px;
 }
 #aboutBox{
-  background-color: rgb(238, 238, 121);
+  background-color: white;
   display: flex;
   flex-direction: column;
   justify-self: center;
   justify-content: center;
   color: black;
+  width: 90vw;
+  height: 60vh;
+  padding: 20px;
 }
 
 /* Profile page */
