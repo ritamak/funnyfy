@@ -13,8 +13,6 @@ const checkLoggedIn = (req, res, next) => {
   }
 };
 
-const addExclamation = (string) => string.charAt(string.length-1) === "!" ? string : string + "!"
-
 // ------------------------------- GET -----------------------------------
 
 // GET about
@@ -40,13 +38,13 @@ router.get('/logout', (req, res, next) => {
 });
 
 // GET profile
-router.get('/profile/:id', checkLoggedIn, addExclamation, (req, res, next) => {
+router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
   if (req.session.loggedInUser) {
     let myUserId = req.session.loggedInUser._id;
     UserModel.findById(myUserId)
     .populate("favJokes")
     .then((user) => {
-    res.render('auth/profile.hbs', {user, myUserId, addExclamation});
+    res.render('auth/profile.hbs', {user, myUserId});
   })
     .catch((err) => {
     next(err);

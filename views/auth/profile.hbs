@@ -1,6 +1,6 @@
 <!-- TITLE -->
 <div id="profileText">
-<h1>Hello {{user.username}} Welcome!</h1>
+<h1>Welcome {{user.username}}</h1>
 <br>
 <!-- PROFILE INFO & EDIT -->
 <div id="profileWrapper">
@@ -12,7 +12,10 @@
         </div>
         <a href="/profile/{{user._id}}/edit"><i class="bi bi-gear" style="font-size:48px"></i></a>
         </div>
-            <p style="font-size: 18px; color:red">You can  share on facebook your favorite jokes! Underline the joke you like and click in the share button!</p>
+        <div id="profileWarningFB">
+        <p style="font-size: 18px; color:#f0eeeb">You can  share on facebook your favorite jokes!</p>
+        <p style="font-size: 18px; color:#f0eeeb">Underline the joke you like and click in the share button!</p>
+        </div>
     </div>
     <div></div>
     <!-- FAVORITE JOKES -->
