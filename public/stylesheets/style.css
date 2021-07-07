@@ -371,6 +371,14 @@ span .container{
 .container {
   margin-top: 15px;
 }
+
+.container-img{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
 /* Carousel Styles */
 .carousel slide
 .carousel-indicators .active {
