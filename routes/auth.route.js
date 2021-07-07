@@ -53,24 +53,19 @@ router.get('/logout', (req, res, next) => {
 
 // GET profile
 router.get('/profile/:id', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
-    let myUserId = req.session.loggedInUser._id;
-    UserModel.findById(myUserId)
-    .populate("favJokes")
-    .then((user) => {
-    res.render('auth/profile.hbs', {user, myUserId});
-  })
-    .catch((err) => {
-    next(err);
-  })
-  } else {
-    next("you don't have acess");
-  }
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findById(myUserId)
+  .populate("favJokes")
+  .then((user) => {
+  res.render('auth/profile.hbs', {user, myUserId});
+})
+  .catch((err) => {
+  next(err);
+})
 });
 
 // GET main
 router.get("/main", checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
     JokeModel.find()
     .then((jokes) => {
       let general = jokes.filter(joke => joke.type.includes("general"));
@@ -94,14 +89,10 @@ router.get("/main", checkLoggedIn, (req, res, next) => {
     .catch((err) => {
       next(err);
     })
-  } else {
-    next("you dont have acess");
-  }
 });
 
 // GET main / general
 router.get('/main/general', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
@@ -111,14 +102,10 @@ router.get('/main/general', checkLoggedIn, (req, res, next) => {
   .catch((err) => {
     next(err);
   })
-  } else {
-    next("you don't have acess");
-  }
 });
 
 // GET main / knock knock 
 router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
@@ -129,14 +116,10 @@ router.get('/main/knock-knock', checkLoggedIn, (req, res, next) => {
   .catch((err) => {
     next(err)
   })
-  } else {
-  next("you dont have acess");
-  }
 });
 
 // GET main / programming
 router.get('/main/programming', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
@@ -146,14 +129,10 @@ router.get('/main/programming', checkLoggedIn, (req, res, next) => {
   .catch((err) => {
     console.log(err);
   })
-  } else {
-    next("you don't have acess");
-  }
 });
 
 // GET profile edit
 router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
-  if (req.session.loggedInUser) {
   let myUserId = req.session.loggedInUser._id;
   UserModel.findById(myUserId)
   .then((user) => {
@@ -162,13 +141,10 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   .catch((err) => {
     next(err);
   })
-  } else {
-    console.log("Edit Failed");
-  }
 });
 
 // GET create joke
-router.get('/main/create', (req, res, next) => {
+router.get('/main/create', checkLoggedIn, (req, res, next) => {
   res.render("auth/create-joke.hbs")
 });
 
@@ -224,7 +200,7 @@ const {email, password} = req.body;
 });
 
 // POST add fav
-router.post("/add-fav", checkLoggedIn, (req, res, next) => {
+router.post("/add-fav", (req, res, next) => {
   if (req.session.loggedInUser) {
     JokeModel.findOne({_id: req.body._id})
     .then((joke) => {
@@ -267,7 +243,7 @@ router.post('/:id/delete', (req, res, next) => {
 });
 
 // POST profile edit
-router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
+router.post('/profile/:id', (req, res, next) => {
   const { id } = req.params
   const {username, email } = req.body
   let myUserId = req.session.loggedInUser._id;
