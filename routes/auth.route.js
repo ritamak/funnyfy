@@ -301,5 +301,7 @@ router.post('/main/create', (req, res, next) => {
   res.render("auth/create-joke.hbs")
   })
 });
-        
+
+
+
 module.exports = router;
