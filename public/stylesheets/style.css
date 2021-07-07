@@ -420,3 +420,11 @@ filter: alpha(opacity=70);
 #facebookShare{
   text-align: center;
 }
+
+/* CREATE JOKE */
+#createJoke{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

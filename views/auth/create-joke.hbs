@@ -1,12 +1,14 @@
 <h2>Create a new joke</h2>
+<div id="createJoke">
 <form method="POST" action="/main/create">
   <div class="mb-3" id="create">
  <label for="type">Choose a type:</label>
-  <select name="type">
-      <option value="general">general</option>
-      <option value="knock-knock">knock-knock</option>
-      <option value="programming">programming</option>
-  </select>
+    <select name="type" style="width: 100%">
+        <option value="general">general</option>
+        <option value="knock-knock">knock-knock</option>
+        <option value="programming">programming</option>
+    </select>
+    <br>
     <br>
     <label class="form-label" >Setup</label>
     <input class="form-control" type="text" name="setup"  placeholder="the setup here" required>
@@ -17,3 +19,4 @@
     <button type="submit"><i class="bi bi-save"></i></button>
   </div>
 </form>
+</div>
