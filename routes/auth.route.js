@@ -167,6 +167,11 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
   }
 });
 
+// GET create joke
+router.get('/main/create', (req, res, next) => {
+  res.render("auth/create-joke.hbs")
+});
+
 // -------------- POST ------------
 
 // POST signUp  
@@ -274,6 +279,27 @@ router.post('/profile/:id', checkLoggedIn, (req, res, next) => {
     .catch((err) => {
         next('Edit failed', err)
     })
-  });
+});
+
+// POST create joke
+router.post('/main/create', (req, res, next) => {
+  const {id, type, setup, punchline} = req.body
+  JokeModel.find()
+  .then((jokes) => {
+    const ids = jokes.map(function(joke) {
+      return joke.id
+    });
+    let id = Math.max(...ids) + 1
+    JokeModel.create({id, type, setup, punchline})
+    .then(() => {
+      console.log("joke created")
+      res.redirect('/main')
+    })
+  })
+  .catch(() => {
+  console.log("adding joke failed")
+  res.render("auth/create-joke.hbs")
+  })
+});
         
 module.exports = router;
