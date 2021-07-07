@@ -6,12 +6,19 @@ body {
   color: white;
 }
 
+
 nav {
+  
   display:flex;
   flex-direction: column;
   justify-content: center;
   justify-items: center;
   padding-bottom: 10px;
+}
+
+#iconsPrivate{
+  background-color: #1f2020;;
+  padding-left: 10px;
 }
 
 #aboutIcon {
@@ -132,7 +139,7 @@ ul li {
   text-align: center;
   margin-top: -40px;  
   padding: 40px;
- 
+
 }
 /* About page */
 #aboutText {
@@ -173,17 +180,17 @@ ul li {
 }
 
 #profileText{
-  color: rgb(253, 252, 250);
+  color: #fdfcfa;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   align-self: center;
-  padding: 40px
+  padding: 40px;
 }
 #profileInfo{
-  background-color: white;
-  color: black;
+  background-color: rgb(53, 95, 85);
+  color: rgb(228, 222, 222);
   width: 80%;
   border-radius: 25px;
   display: flex;
@@ -194,7 +201,7 @@ ul li {
   padding: 10px;
 }
 #deleteFav {
-  background-color: green;
+  background-color: rgb(243, 150, 10);
 }
 #profileWrapper{
   display: flex;
@@ -206,7 +213,7 @@ ul li {
   margin-right: 30px;
 }
 #editprofileWrapper{
-  background-color: yellow;
+  background-color: rgb(120, 190, 173);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -237,7 +244,24 @@ ul li {
 #welcomeProfle {
   color: white;
 }
+#e-decoration {
+  width: 75%;
+  height: 75%;
+  image-resolution: 250px auto;
+}
+#main-img{
+  width: 25%;
+  height: 25%;
+  image-resolution: 250px auto;
+}
+#main-image {
+  width: 20%;
+  height: 105%;
+  image-resolution: 250px auto;
+}
+
 #jokeText{
+  color:blanchedalmond;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -257,7 +281,7 @@ ul li {
   justify-content: center;
   text-align: center;
   margin: 10px;
-  background-color: yellow;
+  background-color: rgb(0, 148, 123);
   color: black;
   font-size: 30px;
   width: 30%;
@@ -283,7 +307,7 @@ ul li {
   justify-content: center;
   text-align: center;
   margin: 10px;
-  background-color: yellow;
+  background-color: rgb(145, 66, 118);
   color: black;
   font-size: 30px;
   width: 30%;
