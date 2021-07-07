@@ -5,12 +5,6 @@ const bcrypt = require('bcryptjs');
 const JokeModel = require('../models/Joke.model');
 const Handlebars = require("hbs");
 
-/*
-Handlebars.registerHelper('addEx', function (string) {
-  return string.charAt(string.length - 1) === "!" ? string : string+"!"
-})
-*/
-
 // for adding random emoji
 Handlebars.registerHelper('addEmoji', function (string) {
   const emojiArray = ["&#129325", "&#129322", "&#128579", "&#128569", "&#128541", "&#128540", "&#128539", "&#128527", "&#128518", "&#128517", "&#128516", "&#128515", "&#128514"," &#128513", "&#128512", "&#128584", "&#128585", "&#128586"] 
