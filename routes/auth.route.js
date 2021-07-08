@@ -278,6 +278,19 @@ router.post('/main/create', (req, res, next) => {
   })
 });
 
+router.post('/profile/:id/delete', (req, res, next) => {
+  const { id } = req.params
+  let myUserId = req.session.loggedInUser._id;
+  UserModel.findByIdAndDelete(id)
+      .then(() => {
+        req.session.destroy();
+        req.app.locals.isLoggedIn = false;
+        res.redirect('/');
+      })
+      .catch((err) => {
+          next(err)
+      })
+});
 
 
 module.exports = router;

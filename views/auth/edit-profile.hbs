@@ -13,3 +13,7 @@
         <button type="submit"><i class="bi bi-save"></i></button>
       </div>
 </form>
+<p>Delete your account</p>
+<form action="/profile/{{user._id}}/delete" method="POST">
+  <button class="btn btn-danger"><i class="bi bi-x-square"></i></button>
+</form>
