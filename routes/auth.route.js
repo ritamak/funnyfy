@@ -140,7 +140,7 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
 // GET create joke
 router.get('/main/create', checkLoggedIn, (req, res, next) => {
   let myUserId = req.session.loggedInUser._id;
-  res.render("auth/create-joke.hbs")
+  res.render("auth/create-joke.hbs", {myUserId})
 });
 
 // -------------- POST ------------
