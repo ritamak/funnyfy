@@ -139,6 +139,7 @@ router.get('/profile/:id/edit', checkLoggedIn, (req, res, next) => {
 
 // GET create joke
 router.get('/main/create', checkLoggedIn, (req, res, next) => {
+  let myUserId = req.session.loggedInUser._id;
   res.render("auth/create-joke.hbs")
 });
 
@@ -254,6 +255,7 @@ router.post('/profile/:id', (req, res, next) => {
 // POST create joke
 router.post('/main/create', (req, res, next) => {
   const {id, type, setup, punchline} = req.body
+  let myUserId = req.session.loggedInUser._id;
   JokeModel.find()
   .then((jokes) => {
     const ids = jokes.map(function(joke) {
@@ -261,9 +263,13 @@ router.post('/main/create', (req, res, next) => {
     });
     let id = Math.max(...ids) + 1
     JokeModel.create({id, type, setup, punchline})
-    .then(() => {
+    .then((joke) => {
       console.log("joke created")
-      res.redirect('/main')
+      UserModel.findByIdAndUpdate(myUserId, {$push: {favJokes: joke._id}})
+      .then(() => {
+        console.log("added to fav")
+        res.redirect('/main')
+      })
     })
   })
   .catch(() => {
